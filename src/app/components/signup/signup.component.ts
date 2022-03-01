@@ -21,6 +21,8 @@ export class SignupComponent implements OnInit {
   address: string = ''
   usernameErrorMessage: string = ''
   passwordErrorMessage: string = ''
+  nameErrorMessage: string = ''
+  addressErrorMessage: string = ''
 
   constructor(
     private router: Router,
@@ -36,6 +38,8 @@ export class SignupComponent implements OnInit {
   signUp(): void {
     this.usernameErrorMessage = ""
     this.passwordErrorMessage = ""
+    this.nameErrorMessage = ""
+    this.addressErrorMessage = ""
     let username = this.username.trim()
     let password = this.password.trim()
     let name = this.name.trim()
@@ -62,6 +66,12 @@ export class SignupComponent implements OnInit {
           }
           if(userData.error.password){
             this.passwordErrorMessage = `Password ${userData.error.password[0]}`
+          }
+          if(userData.error.name){
+            this.passwordErrorMessage = `Name ${userData.error.password[0]}`
+          }
+          if(userData.error.address){
+            this.passwordErrorMessage = `Address ${userData.error.password[0]}`
           }
         }
       });

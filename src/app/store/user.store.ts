@@ -7,20 +7,23 @@ import { User } from '../models/user';
 export const logInUser = createAction('[Log In] Log In User', props<User>())
 export const logOutUser = createAction('[Nav] Log Out User')
 
+
 // reducer
 
 interface UserState {
     userId: number | null,
     username: string,
     isMaker: boolean,
-    name: string
+    name: string,
+    address: string
 }
 
 const initialState: UserState = {
     userId: null,
     username: '',
     isMaker: false,
-    name: ''
+    name: '',
+    address: ''
 }
 
 export const userReducer = createReducer<UserState>(
@@ -29,7 +32,9 @@ export const userReducer = createReducer<UserState>(
     on(logOutUser, () => initialState)
 )
 
+
 // selectors
+
 export const USER_FEATURE_NAME = 'user'
 
 const userFeatureSelector = createFeatureSelector<UserState>(
@@ -45,3 +50,19 @@ export const selectUserId = createSelector(
     userFeatureSelector,
     (userState) => userState.userId
 )
+
+export const selectUserIsMaker = createSelector(
+    userFeatureSelector,
+    (userState) => userState.isMaker
+)
+
+export const selectMakerName = createSelector(
+    userFeatureSelector,
+    (userState) => userState.name
+)
+
+export const selectMakerAddress = createSelector(
+    userFeatureSelector,
+    (userState) => userState.address
+)
+

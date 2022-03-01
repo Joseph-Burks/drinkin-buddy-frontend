@@ -7,5 +7,10 @@
 <app-beer-search></app-beer-search> -->
 <div>
   <h1>Dashboard</h1>
-  <h2>{{ username$ | async}}</h2>
+  <div *ngIf="isMaker$ | async; else elseBlock">
+    <h2>{{ name$ | async }}</h2>
+  </div>
+  <ng-template #elseBlock>
+    <h2>{{ username$ | async }}</h2>
+  </ng-template>
 </div>
