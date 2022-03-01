@@ -1,0 +1,10 @@
+<div>
+    <p *ngIf="errorMessage.trim()">{{ errorMessage }}</p>
+    <label for="username" >Username: </label>
+    <input id="username" placeholder="Username" [(ngModel)]="username">
+    <label for="password">Password: </label>
+    <input id="password" type="password" placeholder="Password" [(ngModel)]="password">
+    <button (click)="logIn()">Log In</button>
+    <p>Need to sign up?</p>
+    <a routerLink='/signup'>Go to Sign Up</a>
+</div>

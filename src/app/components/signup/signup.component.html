@@ -1,0 +1,19 @@
+<div>
+    <p class="error" *ngIf="usernameErrorMessage.trim()">{{ usernameErrorMessage }}</p>
+    <p class="error" *ngIf="passwordErrorMessage.trim()">{{ passwordErrorMessage }}</p>
+    <label for="username" >Username: </label>
+    <input id="username" placeholder="Username" [(ngModel)]="username">
+    <label for="password">Password: </label>
+    <input id="password" type="password" placeholder="Password" [(ngModel)]="password">
+    <label for="isMaker">Are you a beer maker? </label>
+    <input id="isMaker" type="checkbox" [(ngModel)]="isMaker">
+    <ng-container *ngIf="isMaker">
+        <label for="name" >Brewery Name: </label>
+        <input id="name" placeholder="Brewery Name" [(ngModel)]="name">
+        <label for="address" >Address: </label>
+        <input id="address" placeholder="Address" [(ngModel)]="address">
+    </ng-container>
+    <button (click)="signUp()">Sign Up</button>
+    <p>Already signed up?</p>
+    <a routerLink='/login'>Go to Log In</a>
+</div>

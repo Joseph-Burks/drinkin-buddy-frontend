@@ -1,0 +1,48 @@
+{
+  "beers": [
+    {
+      "id": 1,
+      "name": "Budweiser"
+    },
+    {
+      "id": 2,
+      "name": "Bud Light"
+    },
+    {
+      "id": 3,
+      "name": "Michelob Ultra"
+    },
+    {
+      "id": 4,
+      "name": "Miller Lite"
+    },
+    {
+      "id": 5,
+      "name": "Art Car IPA"
+    },
+    {
+      "id": 6,
+      "name": "Texas Winter IPA"
+    },
+    {
+      "id": 7,
+      "name": "Pabst Blue Ribbon"
+    },
+    {
+      "id": 8,
+      "name": "Crawford Bock"
+    },
+    {
+      "id": 10,
+      "name": "Coors"
+    },
+    {
+      "name": "Taco",
+      "id": 11
+    },
+    {
+      "name": "Voodoo Ranger",
+      "id": 12
+    }
+  ]
+}

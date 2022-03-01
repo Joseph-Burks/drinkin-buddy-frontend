@@ -1,0 +1,18 @@
+<h2>My Beers</h2>
+<div>
+    <label for="new-beer">Beer name: </label>
+    <input id="new-beer" #beerName />
+  
+    <!-- (click) passes input value to add() and then clears the input -->
+    <button class="add-button" (click)="add(beerName.value); beerName.value=''">
+      Add beer
+    </button>
+  </div>
+<ul class='beers'>
+    <li *ngFor='let beer of beers'>
+        <a routerLink='/detail/{{beer.id}}'>
+            <span class='badge'>{{beer.id}}</span> {{beer.name}}
+        </a>
+        <button class="delete" title="delete beer" (click)="delete(beer)">x</button>
+    </li>
+</ul>
