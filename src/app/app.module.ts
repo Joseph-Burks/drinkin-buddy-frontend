@@ -22,7 +22,10 @@ import { BeerSearchComponent } from './components/beer-search/beer-search.compon
 import { UserService } from './services/user.service';
 
 import { userReducer, USER_FEATURE_NAME } from './store/user.store';
+import { breweryReducer, BREWERY_FEATURE_NAME } from './store/brewery.store';
 import { NavigationComponent } from './components/navigation/navigation.component';
+import { BreweriesComponent } from './components/breweries/breweries.component';
+import { AddBreweryComponent } from './components/breweries/add-brewery/add-brewery.component';
 
 
 @NgModule({
@@ -37,6 +40,8 @@ import { NavigationComponent } from './components/navigation/navigation.componen
     MessagesComponent,
     BeerSearchComponent,
     NavigationComponent,
+    BreweriesComponent,
+    AddBreweryComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,7 +50,8 @@ import { NavigationComponent } from './components/navigation/navigation.componen
     AppRoutingModule,
     HttpClientModule,
     StoreDevtoolsModule,
-    StoreModule.forRoot({[USER_FEATURE_NAME]: userReducer})
+    StoreModule.forRoot({[USER_FEATURE_NAME]: userReducer}),
+    //StoreModule.forFeature({BREWERY_FEATURE_NAME, breweryReducer})
   ],
   providers: [UserService],
   bootstrap: [AppComponent]

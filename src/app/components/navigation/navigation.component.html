@@ -1,5 +1,8 @@
 <p>navigation works!</p>
 
 <ng-container *ngIf="userId$ | async">
+        <button >Reviews</button>
+        <button (click)='goToBreweries()'>Breweries</button>
+        <button >Beers</button>
         <button (click)='logOut()'>Log Out</button>
 </ng-container>

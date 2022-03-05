@@ -12,23 +12,20 @@ export const logOutUser = createAction('[Nav] Log Out User')
 
 interface UserState {
     userId: number | null,
-    username: string,
-    isMaker: boolean,
-    name: string,
-    address: string
+    username: string
 }
 
 const initialState: UserState = {
     userId: null,
-    username: '',
-    isMaker: false,
-    name: '',
-    address: ''
+    username: ''
 }
 
 export const userReducer = createReducer<UserState>(
     initialState,
-    on(logInUser, (state, User) => ({...state, userId: User.id, username: User.username, isMaker: User.isMaker, name: User.name})),
+    on(logInUser, (state, User) => {
+        console.log(User)
+        return {...state, userId: User.id, username: User.username}
+}),
     on(logOutUser, () => initialState)
 )
 
@@ -49,20 +46,5 @@ export const selectUsername = createSelector(
 export const selectUserId = createSelector(
     userFeatureSelector,
     (userState) => userState.userId
-)
-
-export const selectUserIsMaker = createSelector(
-    userFeatureSelector,
-    (userState) => userState.isMaker
-)
-
-export const selectMakerName = createSelector(
-    userFeatureSelector,
-    (userState) => userState.name
-)
-
-export const selectMakerAddress = createSelector(
-    userFeatureSelector,
-    (userState) => userState.address
 )
 

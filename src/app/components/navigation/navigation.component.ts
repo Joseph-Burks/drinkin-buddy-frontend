@@ -21,6 +21,10 @@ export class NavigationComponent implements OnInit {
     console.log(this.userId$)
   }
 
+  goToBreweries(): void {
+    this.router.navigate(['/breweries'])
+  }
+
   logOut(): void {
     this._store.dispatch(logOutUser())
     localStorage.removeItem('token')

@@ -5,7 +5,7 @@ import { Router } from "@angular/router";
 import { Store } from '@ngrx/store';
 
 import { UserService } from '../../services/user.service';
-import { logInUser } from 'src/app/store/user.store';
+import { logInUser } from '../../store/user.store';
 
 @Component({
   selector: 'app-login',
@@ -43,6 +43,7 @@ export class LoginComponent implements OnInit {
     this.userService.logIn(userInfo)
       .subscribe((userData) => {
         if(userData.user){
+          console.log(userData)
           localStorage.setItem('token', userData.token)
           this._store.dispatch(logInUser(userData.user))
           this.router.navigate(['/dashboard'])

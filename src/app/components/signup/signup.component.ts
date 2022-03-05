@@ -38,20 +38,13 @@ export class SignupComponent implements OnInit {
   signUp(): void {
     this.usernameErrorMessage = ""
     this.passwordErrorMessage = ""
-    this.nameErrorMessage = ""
-    this.addressErrorMessage = ""
     let username = this.username.trim()
     let password = this.password.trim()
-    let name = this.name.trim()
-    let address = this.address.trim()
 
     const newUser = {
       user: {
         username,
-        password,
-        'is_maker?': this.isMaker,
-        name,
-        address
+        password
       }
     }
     this.userService.signUp(newUser)
@@ -66,12 +59,6 @@ export class SignupComponent implements OnInit {
           }
           if(userData.error.password){
             this.passwordErrorMessage = `Password ${userData.error.password[0]}`
-          }
-          if(userData.error.name){
-            this.passwordErrorMessage = `Name ${userData.error.password[0]}`
-          }
-          if(userData.error.address){
-            this.passwordErrorMessage = `Address ${userData.error.password[0]}`
           }
         }
       });

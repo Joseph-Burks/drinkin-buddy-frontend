@@ -21,7 +21,6 @@ export class AppComponent implements OnInit {
 
   getUser(): void { this.userService.getUser()
     .subscribe((user) => {
-      console.log(user)
       if(user.username){
         this._store.dispatch(logInUser(user))
         this.router.navigate(['/dashboard'])
