@@ -4,7 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools'
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { EffectsModule } from '@ngrx/effects';
 
@@ -21,8 +22,7 @@ import { BeerSearchComponent } from './components/beer-search/beer-search.compon
 
 import { UserService } from './services/user.service';
 
-import { userReducer, USER_FEATURE_NAME } from './store/user.store';
-import { breweryReducer, BREWERY_FEATURE_NAME } from './store/brewery.store';
+import { appReducer, APP_FEATURE_NAME } from './store/app.store';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { BreweriesComponent } from './components/breweries/breweries.component';
 import { AddBreweryComponent } from './components/breweries/add-brewery/add-brewery.component';
@@ -49,8 +49,12 @@ import { AddBreweryComponent } from './components/breweries/add-brewery/add-brew
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
-    StoreDevtoolsModule,
-    StoreModule.forRoot({[USER_FEATURE_NAME]: userReducer}),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, // Retains last 25 states
+      logOnly: environment.production, // Restrict extension to log-only mode
+      autoPause: true, // Pauses recording actions and state changes when the extension window is not open
+    }),
+    StoreModule.forRoot({[APP_FEATURE_NAME]: appReducer}),
     //StoreModule.forFeature({BREWERY_FEATURE_NAME, breweryReducer})
   ],
   providers: [UserService],

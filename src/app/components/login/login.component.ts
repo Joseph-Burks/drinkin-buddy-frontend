@@ -5,7 +5,7 @@ import { Router } from "@angular/router";
 import { Store } from '@ngrx/store';
 
 import { UserService } from '../../services/user.service';
-import { logInUser } from '../../store/user.store';
+import { logInUser } from '../../store/app.store';
 
 @Component({
   selector: 'app-login',

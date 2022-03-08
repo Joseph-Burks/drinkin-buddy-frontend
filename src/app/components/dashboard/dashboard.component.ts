@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { User } from '../../models/user'
-import { selectUsername } from '../../store/user.store';
+import { selectUsername } from '../../store/app.store';
 
 
 @Component({

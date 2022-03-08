@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
-import { logOutUser, selectUserId } from 'src/app/store/user.store';
+import { logOutUser, selectUserId } from 'src/app/store/app.store';
 
 @Component({
   selector: 'app-navigation',

@@ -5,7 +5,7 @@ import { Router } from "@angular/router";
 import { Store } from '@ngrx/store';
 
 import { UserService } from '../../services/user.service';
-import { logInUser } from 'src/app/store/user.store'
+import { logInUser } from 'src/app/store/app.store'
 
 @Component({
   selector: 'app-signup',
