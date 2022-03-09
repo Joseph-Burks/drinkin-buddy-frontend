@@ -11,6 +11,7 @@ import {
   passwordError,
   usernameError,
   signUpUser,
+  userLoaded
 
 } from 'src/app/store/app.store'
 
@@ -25,6 +26,8 @@ export class SignupComponent implements OnInit {
   password: string = ''
   usernameErrorMessage$: Observable<string> = this._store.select(usernameError)
   passwordErrorMessage$: Observable<string> = this._store.select(passwordError)
+  userLoaded$: Observable<boolean> = this._store.select(userLoaded)
+
 
   constructor(
     private router: Router,

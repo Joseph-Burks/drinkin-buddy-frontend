@@ -1,6 +1,6 @@
 <div>
-    <p class="error" *ngIf="usernameErrorMessage$ | async">{{ usernameErrorMessage$ }}</p>
-    <p class="error" *ngIf="passwordErrorMessage$ | async">{{ passwordErrorMessage$ }}</p>
+    <p class="error" *ngIf="usernameErrorMessage$ | async">{{ usernameErrorMessage$ | async }}</p>
+    <p class="error" *ngIf="passwordErrorMessage$ | async">{{ passwordErrorMessage$ | async }}</p>
     <label for="username" >Username: </label>
     <input id="username" placeholder="Username" [(ngModel)]="username">
     <label for="password">Password: </label>

@@ -84,32 +84,38 @@ export const selectUsername = createSelector(
     (appState) => appState.username
 )
 
+export const passwordInput = createSelector(
+    appFeatureSelector,
+    (appState) => appState.passwordInput
+)
+    
+export const usernameError = createSelector(
+    appFeatureSelector,
+    (appState) => appState.usernameError
+)
+        
+export const passwordError = createSelector(
+    appFeatureSelector,
+    (appState) => appState.passwordError
+)
+    
 export const selectUserId = createSelector(
     appFeatureSelector,
     (appState) => appState.userId
 )
-
+    
 export const usernameInput = createSelector(
     appFeatureSelector,
     (appState) => appState.usernameInput
 )
 
-export const passwordInput = createSelector(
+export const userLoaded = createSelector(
     appFeatureSelector,
-    (appState) => appState.passwordInput
+    (appState) => appState.userLoaded
 )
-
-export const usernameError = createSelector(
-    appFeatureSelector,
-    (appState) => appState.usernameError
-)
-
-export const passwordError = createSelector(
-    appFeatureSelector,
-    (appState) => appState.passwordError
-)
-
+            
 // Breweries
+
 export const breweriesLoading = createSelector(
     appFeatureSelector,
     (appState) => appState.breweriesLoading

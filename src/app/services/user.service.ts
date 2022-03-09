@@ -36,11 +36,7 @@ export class UserService {
   }
 
   signUp(newUser: any): Observable<any> {
-    console.log('signing up')
     return this.http.post<any>(this.usersUrl, newUser, this.httpOptions)
-      .pipe(
-        catchError(this.handleError<any>('createUser'))
-      )
   }
 
   logIn(userInfo: any): Observable<any> {

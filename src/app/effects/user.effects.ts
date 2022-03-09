@@ -1,46 +1,68 @@
-import { usernameInput } from './../store/app.store';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { EMPTY } from 'rxjs';
 import { map, mergeMap, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { Store } from '@ngrx/store';
+import { Router } from "@angular/router";
 
 import { UserService } from '../services/user.service';
+import { SuccessfulUserResponse } from '../models/successfulUserResponse';
 
 import {
+    logInUser,
     signUpUser,
     signUpUserFail,
     userLoadedSuccess,
+    userLoadedFail
 } from '../store/app.store';
 
  
 @Injectable()
 export class UserEffects {
     
-    loadUser$ = createEffect(() => this.actions$.pipe(
+    signUpUser$ = createEffect(() => this.actions$.pipe(
         ofType(signUpUser),
         mergeMap((action) => this.userService.signUp({user: {username: action.usernameInput, password: action.passwordInput}})
             .pipe(
-                map(user => userLoadedSuccess(user)),
-                catchError(error => {
+                map(response => this.succesfullLogIn(response)),
+                catchError(response => {
                     let usernameError = ''
                     let passwordError = ''
-                    if(error.username){
-                        usernameError = `Username ${usernameError}`
+                    if(response.error.username){
+                        usernameError = `Username ${response.error.username[0]}`
                     }
-                    if(error.password){
-                        passwordError = `Username ${usernameError}`
+                    if(response.error.password){
+                        passwordError = `Password ${response.error.password[0]}`
                     }
                     return of(signUpUserFail({usernameError, passwordError}))
                 })
             )
         )
     ));
+
+    logInUser$ = createEffect(() => this.actions$.pipe(
+        ofType(logInUser),
+        mergeMap((action) => this.userService.logIn({user: {username: action.usernameInput, password: action.passwordInput}})
+            .pipe(
+                map(response => this.succesfullLogIn(response)),
+                catchError(response => {
+                    return of(userLoadedFail({error: response.error}))
+                })
+            )
+        )
+    ));
+    
  
     constructor(
         private actions$: Actions,
+        private router: Router,
         private userService: UserService,
         private _store: Store
     ) {}
+
+    succesfullLogIn(response: SuccessfulUserResponse) {
+        localStorage['token'] = response.token
+        this.router.navigate(['/dashboard'])
+        return userLoadedSuccess(response.user)
+    }
 }
