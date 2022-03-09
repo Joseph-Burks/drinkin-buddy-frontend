@@ -42,12 +42,10 @@ export class UserEffects {
 
     logInUser$ = createEffect(() => this.actions$.pipe(
         ofType(logInUser),
-        mergeMap((action) => this.userService.logIn({user: {username: action.usernameInput, password: action.passwordInput}})
+        mergeMap((action) => this.userService.logIn({ user: {username: action.usernameInput, password: action.passwordInput }})
             .pipe(
                 map(response => this.succesfullLogIn(response)),
-                catchError(response => {
-                    return of(userLoadedFail({error: response.error}))
-                })
+                catchError(response => of(userLoadedFail({ error: response.error })))
             )
         )
     ));

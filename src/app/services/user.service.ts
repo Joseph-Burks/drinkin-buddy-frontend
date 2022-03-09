@@ -41,9 +41,6 @@ export class UserService {
 
   logIn(userInfo: any): Observable<any> {
     return this.http.post<any>(this.userLogInUrl, userInfo, this.httpOptions)
-      .pipe(
-        catchError(this.handleError<any>('LogInUser'))
-      )
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

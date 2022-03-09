@@ -1,5 +1,5 @@
 <div>
-    <p *ngIf="errorMessage.trim()">{{ errorMessage }}</p>
+    <p class="error" *ngIf="errorMessage$ | async">{{ errorMessage$ | async }}</p>
     <label for="username" >Username: </label>
     <input id="username" placeholder="Username" [(ngModel)]="username">
     <label for="password">Password: </label>

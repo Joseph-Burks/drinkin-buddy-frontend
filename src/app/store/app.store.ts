@@ -98,6 +98,11 @@ export const passwordError = createSelector(
     appFeatureSelector,
     (appState) => appState.passwordError
 )
+
+export const logInError = createSelector(
+    appFeatureSelector,
+    (appState) => appState.logInError
+)
     
 export const selectUserId = createSelector(
     appFeatureSelector,

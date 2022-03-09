@@ -1,11 +1,11 @@
+import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
-import { Router } from "@angular/router";
 import { Store } from '@ngrx/store';
 
-import { UserService } from '../../services/user.service';
-import { logInUser } from '../../store/app.store';
+import {
+  logInError,
+  logInUser
+} from '../../store/app.store';
 
 @Component({
   selector: 'app-login',
@@ -14,15 +14,11 @@ import { logInUser } from '../../store/app.store';
 })
 
 export class LoginComponent implements OnInit {
-  username = ""
-  password = ""
-  errorMessage = ""
+  username = ''
+  password = ''
+  errorMessage$: Observable<string> = this._store.select(logInError)
 
   constructor(
-    private router: Router,
-    private route: ActivatedRoute,
-    private location: Location,
-    private userService: UserService,
     private _store: Store
   ) { }
 
@@ -30,27 +26,15 @@ export class LoginComponent implements OnInit {
   }
 
   logIn(): void {
-    this.errorMessage = ""
-    let username = this.username.trim()
-    let password = this.password.trim()
+    let usernameInput = this.username.trim()
+    let passwordInput = this.password.trim()
 
-    const userInfo = {
-      user: {
-        username,
-        password
-      }
+    const userInput = {
+      usernameInput,
+      passwordInput
     }
-    this.userService.logIn(userInfo)
-      .subscribe((userData) => {
-        if(userData.user){
-          console.log(userData)
-          localStorage.setItem('token', userData.token)
-          this._store.dispatch(logInUser(userData.user))
-          this.router.navigate(['/dashboard'])
-        } else {
-          this.errorMessage = userData.error
-        }
-      });
+
+    this._store.dispatch(logInUser(userInput))
   }
 
 }

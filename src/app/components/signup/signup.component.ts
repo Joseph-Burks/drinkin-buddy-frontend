@@ -5,9 +5,7 @@ import { Store } from '@ngrx/store';
 import { 
   passwordError,
   usernameError,
-  signUpUser,
-  userLoaded
-
+  signUpUser
 } from 'src/app/store/app.store'
 
 @Component({
@@ -21,8 +19,6 @@ export class SignupComponent implements OnInit {
   password: string = ''
   usernameErrorMessage$: Observable<string> = this._store.select(usernameError)
   passwordErrorMessage$: Observable<string> = this._store.select(passwordError)
-  userLoaded$: Observable<boolean> = this._store.select(userLoaded)
-
 
   constructor(
     private _store: Store
