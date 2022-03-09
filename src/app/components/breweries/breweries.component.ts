@@ -3,7 +3,12 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { Brewery } from '../../models/brewery';
-import { selectBreweries } from '../../store/app.store';
+import { 
+  loadBreweries,
+  breweriesLoading,
+  breweriesLoaded,
+  breweries
+} from '../../store/app.store';
 
 @Component({
   selector: 'app-breweries',
@@ -12,8 +17,10 @@ import { selectBreweries } from '../../store/app.store';
 })
 export class BreweriesComponent implements OnInit {
 
-  breweries$: Observable<Brewery[]> = this._store.select(selectBreweries)
-
+  breweries$: Observable<Brewery[]> = this._store.select(breweries)
+  breweriesLoading$ : Observable<boolean> = this._store.select(breweriesLoading)
+  breweriesLoaded$ : Observable<boolean> = this._store.select(breweriesLoaded)
+  
   constructor(private _store: Store) { }
 
   ngOnInit(): void {
@@ -21,11 +28,11 @@ export class BreweriesComponent implements OnInit {
   }
 
   getAllBreweries(): void {
-    
+    this._store.dispatch(loadBreweries())
   }
 
-  logBreweries(): void {
-    console.log(this.breweries$)
+  logBrewery(brewery: Brewery): void {
+    console.log(brewery)
   }
 
 }

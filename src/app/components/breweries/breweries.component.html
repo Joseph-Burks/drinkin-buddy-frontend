@@ -1,2 +1,13 @@
-<p>breweries works!</p>
-<button (click)='logBreweries()'>Log Breweries</button>
+<h1>{{ breweriesLoaded$ | async }}</h1>
+
+
+<ul class='breweries'>
+
+    <li *ngFor="let brewery of breweries$ | async">
+        <!-- <a routerLink='/detail/{{beer.id}}'> -->
+        <span class='badge'>{{ brewery.id }}</span> {{ brewery.name }}
+        <!-- </a> -->
+        <button (click)='logBrewery(brewery)'>Log Brewery</button>
+    </li>
+
+</ul>

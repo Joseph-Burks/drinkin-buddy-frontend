@@ -23,7 +23,8 @@ export class BreweryService {
     private http: HttpClient,
   ) { }
 
-  getAllBreweries(): Observable<Brewery[]> {
+  getAll(): Observable<Brewery[]> {
+    console.log('getting breweries')
     return this.http.get<Brewery[]>(this.breweriesUrl, this.authOptions)
   }
 

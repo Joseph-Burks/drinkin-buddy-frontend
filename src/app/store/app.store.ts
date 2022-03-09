@@ -61,7 +61,7 @@ export const appReducer = createReducer<AppState>(
     on(signUpUserFail, (state, props) => ({...state, usernameError: props.usernameError, passwordError: props.passwordError, userLoading: false})),
     on(logInUser, (state, props) => ({...state, usernameIput: props.usernameInput, passwordInput: props.passwordInput, userLoading: true})),
     on(userLoadedFail, (state, props) => ({...state, logInError: props.error, userLoading: false})),
-    on(userLoadedSuccess, (state, User) => ({...state, userId: User.id, username: User.username, userLoading: false, userLoaded: true})),
+    on(userLoadedSuccess, (state, User) => ({...state, userId: User.id, username: User.username, userLoading: false, userLoaded: true, usernameError: '', passwordError: ''})),
     on(logOutUser, () => initialState),
     on(loadBreweries, (state) => ({...state, breweriesLoading: true})),
     on(loadBreweriesFail, (state) => ({...state, breweriesLoading: false, breweriesLoaded: false})),
@@ -89,18 +89,38 @@ export const selectUserId = createSelector(
     (appState) => appState.userId
 )
 
+export const usernameInput = createSelector(
+    appFeatureSelector,
+    (appState) => appState.usernameInput
+)
+
+export const passwordInput = createSelector(
+    appFeatureSelector,
+    (appState) => appState.passwordInput
+)
+
+export const usernameError = createSelector(
+    appFeatureSelector,
+    (appState) => appState.usernameError
+)
+
+export const passwordError = createSelector(
+    appFeatureSelector,
+    (appState) => appState.passwordError
+)
+
 // Breweries
-export const selectBreweriesLoading = createSelector(
+export const breweriesLoading = createSelector(
     appFeatureSelector,
     (appState) => appState.breweriesLoading
 )
 
-export const selectBreweriesLoaded = createSelector(
+export const breweriesLoaded = createSelector(
     appFeatureSelector,
     (appState) => appState.breweriesLoaded
 )
 
-export const selectBreweries = createSelector(
+export const breweries = createSelector(
     appFeatureSelector,
     (appState) => appState.breweries.filter(brewery => brewery.name.startsWith(appState.breweriesFilter))
 )

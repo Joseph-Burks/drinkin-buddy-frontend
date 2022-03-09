@@ -14,19 +14,18 @@ import { LandingComponent } from './components/landing/landing.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-
 import { BeersComponent } from './components/beers/beers.component';
 import { BeerDetailsComponent } from './components/beer-details/beer-details.component';
 import { MessagesComponent } from './components/messages/messages.component';
 import { BeerSearchComponent } from './components/beer-search/beer-search.component';
-
-import { UserService } from './services/user.service';
-
-import { appReducer, APP_FEATURE_NAME } from './store/app.store';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { BreweriesComponent } from './components/breweries/breweries.component';
 import { AddBreweryComponent } from './components/breweries/add-brewery/add-brewery.component';
 
+import { UserService } from './services/user.service';
+import { appReducer, APP_FEATURE_NAME } from './store/app.store';
+import { UserEffects } from './effects/user.effects';
+import { BreweryEffects } from './effects/brewery.effects';
 
 @NgModule({
   declarations: [
@@ -55,7 +54,7 @@ import { AddBreweryComponent } from './components/breweries/add-brewery/add-brew
       autoPause: true, // Pauses recording actions and state changes when the extension window is not open
     }),
     StoreModule.forRoot({[APP_FEATURE_NAME]: appReducer}),
-    //StoreModule.forFeature({BREWERY_FEATURE_NAME, breweryReducer})
+    EffectsModule.forRoot([UserEffects, BreweryEffects])
   ],
   providers: [UserService],
   bootstrap: [AppComponent]

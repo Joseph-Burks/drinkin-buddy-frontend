@@ -5,22 +5,27 @@ import { map, mergeMap, catchError } from 'rxjs/operators';
 
 import { BreweryService } from '../services/brewery.service';
 
+import {
+    loadBreweriesFail,
+    loadBreweriesSuccess
+} from '../store/app.store';
+
  
 @Injectable()
 export class BreweryEffects {
  
-  loadBreweries$ = createEffect(() => this.actions$.pipe(
-    ofType('[Breweries Component] Load Breweries'),
-    mergeMap(() => this.breweryService.getAllBreweries()
-      .pipe(
-        map(breweries => ({ type: '[Breweries API] Breweriesies Loaded Success', payload: breweries })),
-        catchError(() => EMPTY)
-      ))
-    )
-  );
+    loadBreweries$ = createEffect(() => this.actions$.pipe(
+        ofType('[Breweries Component] Load Breweries'),
+        mergeMap(() => this.breweryService.getAll()
+            .pipe(
+                map(breweries => loadBreweriesSuccess({breweries})),
+                catchError(() => EMPTY)
+            )
+        )
+    ));
  
-  constructor(
-    private actions$: Actions,
-    private breweryService: BreweryService
-  ) {}
+    constructor(
+        private actions$: Actions,
+        private breweryService: BreweryService
+    ) {}
 }
