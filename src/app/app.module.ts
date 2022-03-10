@@ -24,8 +24,8 @@ import { AddBreweryComponent } from './components/breweries/add-brewery/add-brew
 
 import { UserService } from './services/user.service';
 import { appReducer, APP_FEATURE_NAME } from './store/app.store';
-import { UserEffects } from './effects/user.effects';
-import { BreweryEffects } from './effects/brewery.effects';
+import { UserEffects } from './store/effects/user.effects';
+import { BreweryEffects } from './store/effects/brewery.effects';
 
 @NgModule({
   declarations: [

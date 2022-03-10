@@ -2,11 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 
-import { 
-  passwordError,
-  usernameError,
-  signUpUser
-} from 'src/app/store/app.store'
+import { passwordError, usernameError } from 'src/app/store/app.store'
+import { signUpUser } from '../../store/actions/user.actions'
 
 @Component({
   selector: 'app-signup',

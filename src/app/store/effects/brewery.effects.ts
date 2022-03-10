@@ -3,12 +3,12 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { EMPTY } from 'rxjs';
 import { map, mergeMap, catchError } from 'rxjs/operators';
 
-import { BreweryService } from '../services/brewery.service';
+import { BreweryService } from '../../services/brewery.service';
 
 import {
     loadBreweriesFail,
     loadBreweriesSuccess
-} from '../store/app.store';
+} from '../app.store';
 
  
 @Injectable()

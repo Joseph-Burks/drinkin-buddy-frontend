@@ -5,8 +5,8 @@ import { of } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { Router } from "@angular/router";
 
-import { UserService } from '../services/user.service';
-import { SuccessfulUserResponse } from '../models/successfulUserResponse';
+import { UserService } from '../../services/user.service';
+import { SuccessfulUserResponse } from '../../models/successfulUserResponse';
 
 import {
     logInUser,
@@ -14,7 +14,7 @@ import {
     signUpUserFail,
     userLoadedSuccess,
     userLoadedFail
-} from '../store/app.store';
+} from '../app.store';
 
  
 @Injectable()

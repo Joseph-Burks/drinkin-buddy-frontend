@@ -1,21 +1,10 @@
-import { createAction, createReducer, createSelector, createFeatureSelector, on, props } from '@ngrx/store';
+import { createReducer, createSelector, createFeatureSelector, on, props } from '@ngrx/store';
+
+import * as userActions from './actions/user.actions'
+import * as breweryActions from './actions/brewery.actions'
 
 import { User } from '../models/user';
 import { Brewery } from '../models/brewery';
-
-// actions
-
-export const signUpUser = createAction('[Sign Up] Sign Up User', props<{usernameInput: string, passwordInput: string}>())
-export const signUpUserFail = createAction('[Sign Up] Sign Up User Fail', props<{usernameError: string, passwordError: string,}>())
-export const logInUser = createAction('[Log In] Log In User', props<{usernameInput: string, passwordInput: string}>())
-export const userLoadedFail = createAction('[Log In] User Loaded Fail', props<{error: string}>())
-export const userLoadedSuccess = createAction('[Log In] User Loaded Success', props<User>())
-export const logOutUser = createAction('[Nav] Log Out User')
-
-export const loadBreweries = createAction('[Breweries Component] Load Breweries')
-export const loadBreweriesFail = createAction('[Breweries API] Breweries Loaded Fail')
-export const loadBreweriesSuccess = createAction('[Breweries API] Breweries Loaded Success', props<{breweries: Brewery[]}>())
-export const filterBreweries = createAction('[Breweries Component] Filter Breweries', props<{filter: string}>())
 
 
 // reducer
@@ -28,8 +17,7 @@ interface AppState {
     logInError: string;
     userLoading: boolean;
     userLoaded: boolean
-    userId: number | null;
-    username: string;
+    user: User | null;
 
 
     breweriesLoading: boolean;
@@ -46,8 +34,7 @@ const initialState: AppState = {
     logInError: '',
     userLoading: false,
     userLoaded: false,
-    userId: null,
-    username: '',
+    user: null,
 
     breweriesLoading: false,
     breweriesLoaded: false,
@@ -57,16 +44,16 @@ const initialState: AppState = {
 
 export const appReducer = createReducer<AppState>(
     initialState,
-    on(signUpUser, (state, props) => ({...state, usernameIput: props.usernameInput, passwordInput: props.passwordInput, userLoading: true})),
-    on(signUpUserFail, (state, props) => ({...state, usernameError: props.usernameError, passwordError: props.passwordError, userLoading: false})),
-    on(logInUser, (state, props) => ({...state, usernameIput: props.usernameInput, passwordInput: props.passwordInput, userLoading: true})),
-    on(userLoadedFail, (state, props) => ({...state, logInError: props.error, userLoading: false})),
-    on(userLoadedSuccess, (state, User) => ({...state, userId: User.id, username: User.username, userLoading: false, userLoaded: true, usernameError: '', passwordError: ''})),
-    on(logOutUser, () => initialState),
-    on(loadBreweries, (state) => ({...state, breweriesLoading: true})),
-    on(loadBreweriesFail, (state) => ({...state, breweriesLoading: false, breweriesLoaded: false})),
-    on(loadBreweriesSuccess, (state, props) => ({...state, breweriesLoading: false, breweriesLoaded: true, breweries: props.breweries})),
-    on(filterBreweries, (state, props) => ({ ...state, breweriesFilter: props.filter})),
+    on(userActions.signUpUser, (state, props) => ({...state, usernameIput: props.usernameInput, passwordInput: props.passwordInput, userLoading: true})),
+    on(userActions.signUpUserFail, (state, props) => ({...state, usernameError: props.usernameError, passwordError: props.passwordError, userLoading: false})),
+    on(userActions.logInUser, (state, props) => ({...state, usernameIput: props.usernameInput, passwordInput: props.passwordInput, userLoading: true})),
+    on(userActions.userLoadedFail, (state, props) => ({...state, logInError: props.error, userLoading: false})),
+    on(userActions.userLoadedSuccess, (state, User) => ({...state, user: User, userLoading: false, userLoaded: true, usernameError: '', passwordError: ''})),
+    on(userActions.logOutUser, () => initialState),
+    on(breweryActions.loadBreweries, (state) => ({...state, breweriesLoading: true})),
+    on(breweryActions.loadBreweriesFail, (state) => ({...state, breweriesLoading: false, breweriesLoaded: false})),
+    on(breweryActions.loadBreweriesSuccess, (state, props) => ({...state, breweriesLoading: false, breweriesLoaded: true, breweries: props.breweries})),
+    on(breweryActions.filterBreweries, (state, props) => ({ ...state, breweriesFilter: props.filter})),
 )
 
 
@@ -79,9 +66,24 @@ const appFeatureSelector = createFeatureSelector<AppState>(
 )
 
 // User
-export const selectUsername = createSelector(
+export const username = createSelector(
     appFeatureSelector,
-    (appState) => appState.username
+    (appState) => {
+        if(appState.user){
+            return appState.user.username
+        }
+        return null
+    }
+)
+
+export const userId = createSelector(
+    appFeatureSelector,
+    (appState) => {
+        if(appState.user){
+            return appState.user.id
+        }
+        return null
+    }
 )
 
 export const passwordInput = createSelector(
@@ -102,11 +104,6 @@ export const passwordError = createSelector(
 export const logInError = createSelector(
     appFeatureSelector,
     (appState) => appState.logInError
-)
-    
-export const selectUserId = createSelector(
-    appFeatureSelector,
-    (appState) => appState.userId
 )
     
 export const usernameInput = createSelector(

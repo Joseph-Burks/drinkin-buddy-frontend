@@ -2,10 +2,8 @@ import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import {
-  logInError,
-  logInUser
-} from '../../store/app.store';
+import { logInError } from '../../store/app.store';
+import { logInUser } from '../../store/actions/user.actions'
 
 @Component({
   selector: 'app-login',

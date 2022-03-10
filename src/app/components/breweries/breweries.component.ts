@@ -4,11 +4,12 @@ import { Observable } from 'rxjs';
 
 import { Brewery } from '../../models/brewery';
 import { 
-  loadBreweries,
   breweriesLoading,
   breweriesLoaded,
   breweries
 } from '../../store/app.store';
+
+import { loadBreweries } from '../../store/actions/brewery.actions'
 
 @Component({
   selector: 'app-breweries',
