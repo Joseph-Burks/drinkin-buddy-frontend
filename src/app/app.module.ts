@@ -18,8 +18,8 @@ import { BeersComponent } from './components/beers/beers.component';
 import { BeerDetailsComponent } from './components/beer-details/beer-details.component';
 import { MessagesComponent } from './components/messages/messages.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
-import { BreweriesComponent } from './components/breweries/breweries.component';
-import { AddBreweryComponent } from './components/breweries/add-brewery/add-brewery.component';
+import { BreweriesComponent } from './components/brewery/breweries/breweries.component';
+import { AddBreweryComponent } from './components/brewery/add-brewery/add-brewery.component';
 
 import { UserService } from './services/user.service';
 import { appReducer, APP_FEATURE_NAME } from './store/app.store';

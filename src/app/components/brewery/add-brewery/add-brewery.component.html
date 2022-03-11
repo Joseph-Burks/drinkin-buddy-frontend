@@ -4,7 +4,7 @@
     <label for="name" >Brewery Name: </label>
     <input id="name" placeholder="Name" [(ngModel)]="name">
     
-    <p>Addres:</p>
+    <p>Address:</p>
     <label for="street" >Street: </label>
     <input id="street" placeholder="Street" [(ngModel)]="street">
     
@@ -20,28 +20,18 @@
     <label for="country" >Country: </label>
     <input id="country" placeholder="Country" [(ngModel)]="country">
 
-    <label for="longitutude" >Longitutude: </label>
-    <input id="longitutude" placeholder="Longitutude" [(ngModel)]="longitutude">
+    <label for="longitude" >Longitude: </label>
+    <input id="longitude" placeholder="Longitude" [(ngModel)]="longitude">
 
     <label for="latitude" >Latitude: </label>
     <input id="latitude" placeholder="Latitude" [(ngModel)]="latitude">
 
     <label for="phone" >Phone: </label>
-    <input id="phone" placeholder="Phone" [(ngModel)]="phone">
+    <input id="phone" type='tel' placeholder="Phone" [(ngModel)]="phone">
 
     <label for="url" >Website URL: </label>
-    <input id="url" placeholder="Website URL" [(ngModel)]="url">
+    <input id="url" type='url' placeholder="Website URL" [(ngModel)]="url">
     
     <button (click)="addBrewery()">Add</button>
 </div>
 
-t.string "name"
-    t.string "street"
-    t.string "city"
-    t.string "state"
-    t.string "postal_code"
-    t.string "country"
-    t.string "longitude"
-    t.string "latitude"
-    t.string "phone"
-    t.string "url"

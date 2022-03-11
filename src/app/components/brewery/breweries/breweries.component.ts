@@ -3,14 +3,14 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
-import { Brewery } from '../../models/brewery';
+import { Brewery } from '../../../models/brewery';
 import { 
   breweriesLoading,
   breweriesLoaded,
   breweries
-} from '../../store/app.store';
+} from '../../../store/app.store';
 
-import { loadBreweries, filterBreweries } from '../../store/actions/brewery.actions'
+import { loadBreweries, filterBreweries } from '../../../store/actions/brewery.actions'
 
 @Component({
   selector: 'app-breweries',
@@ -42,7 +42,7 @@ export class BreweriesComponent implements OnInit {
   }
 
   goToAddBrewery(): void {
-    this.router.navigate(['/breweries/new-brewery'])
+    this.router.navigate(['/new-brewery'])
   }
 
 }

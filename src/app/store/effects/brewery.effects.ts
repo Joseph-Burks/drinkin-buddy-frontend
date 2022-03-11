@@ -1,14 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { EMPTY, of } from 'rxjs';
+import { of } from 'rxjs';
 import { map, mergeMap, catchError } from 'rxjs/operators';
+import { Router } from "@angular/router";
+
 
 import { BreweryService } from '../../services/brewery.service';
 
 import {
     loadBreweries,
     loadBreweriesFail,
-    loadBreweriesSuccess
+    loadBreweriesSuccess,
+    addBrewery,
+    addBreweryFail,
+    addBrewerySuccess,
 } from '../actions/brewery.actions';
 
  
@@ -24,9 +29,23 @@ export class BreweryEffects {
             )
         )
     ));
+
+    addBrewery$ = createEffect(() => this.actions$.pipe(
+        ofType(addBrewery),
+        mergeMap((action) => this.breweryService.addNew(action)
+            .pipe(
+                map(brewery => {
+                    //this.router.navigate('/breweries/:id')
+                    return addBrewerySuccess(brewery)
+                }),
+                catchError(response => (of(addBreweryFail({ errorMessage: response.error.name })))
+            )
+        )
+    )))
  
     constructor(
         private actions$: Actions,
-        private breweryService: BreweryService
+        private breweryService: BreweryService,
+        private router: Router,
     ) {}
 }

@@ -12,11 +12,12 @@ import { Beer } from '../models/beer';
 // reducer
 
 interface AppState {
+    errorMessage: string;
+
     usernameInput: string;
     passwordInput: string;
     usernameError: string;
     passwordError: string;
-    logInError: string;
     userLoading: boolean;
     userLoaded: boolean
     user: User | null;
@@ -34,11 +35,12 @@ interface AppState {
 }
 
 const initialState: AppState = {
+    errorMessage: '',
+
     usernameInput: '',
     passwordInput: '',
     usernameError: '',
     passwordError: '',
-    logInError: '',
     userLoading: false,
     userLoaded: false,
     user: null,
@@ -60,14 +62,16 @@ export const appReducer = createReducer<AppState>(
     on(userActions.signUpUserFail, (state, props) => ({...state, usernameError: props.usernameError, passwordError: props.passwordError, userLoading: false})),
     on(userActions.loadUserWithToken, (state, props) => ({...state, userLoading: true})),
     on(userActions.logInUser, (state, props) => ({...state, usernameIput: props.usernameInput, passwordInput: props.passwordInput, userLoading: true})),
-    on(userActions.userLoadedFail, (state, props) => ({...state, logInError: props.error, userLoading: false})),
-    on(userActions.userLoadedSuccess, (state, User) => ({...state, user: User, userLoading: false, userLoaded: true, usernameError: '', passwordError: ''})),
+    on(userActions.userLoadedFail, (state, props) => ({...state, errorMessage: props.error, userLoading: false})),
+    on(userActions.userLoadedSuccess, (state, User) => ({...state, user: User, userLoading: false, userLoaded: true, usernameError: '', passwordError: '', errorMessage: ''})),
     on(userActions.logOutUser, () => initialState),
 
     on(breweryActions.loadBreweries, (state) => ({...state, breweriesLoading: true})),
     on(breweryActions.loadBreweriesFail, (state) => ({...state, breweriesLoading: false, breweriesLoaded: false})),
     on(breweryActions.loadBreweriesSuccess, (state, props) => ({...state, breweriesLoading: false, breweriesLoaded: true, breweries: props.breweries})),
     on(breweryActions.filterBreweries, (state, props) => ({ ...state, breweriesFilter: props.filter})),
+    on(breweryActions.addBreweryFail, (state, props) => ({...state, errorMessage: props.errorMessage})),
+    on(breweryActions.addBrewerySuccess, (state, Brewery) => ({...state, breweries: [...state.breweries, Brewery], errorMessage: ''})),
 
     on(beerActions.loadBeers, (state) => ({...state, beersLoading: true})),
     on(beerActions.loadBeersFail, (state) => ({...state, beersLoading: false, beersLoaded: false})),
@@ -84,6 +88,11 @@ export const APP_FEATURE_NAME = 'user'
 
 const appFeatureSelector = createFeatureSelector<AppState>(
     APP_FEATURE_NAME
+)
+
+export const errorMessage = createSelector(
+    appFeatureSelector,
+    (appState) => appState.errorMessage
 )
 
 // User
@@ -120,11 +129,6 @@ export const usernameError = createSelector(
 export const passwordError = createSelector(
     appFeatureSelector,
     (appState) => appState.passwordError
-)
-
-export const logInError = createSelector(
-    appFeatureSelector,
-    (appState) => appState.logInError
 )
     
 export const usernameInput = createSelector(

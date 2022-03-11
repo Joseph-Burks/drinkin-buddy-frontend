@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { baseUrl } from '../baseUrl';
-import { Brewery } from '../models/brewery';
+import { Brewery, NewBrewery } from '../models/brewery';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +23,10 @@ export class BreweryService {
 
   getAll(): Observable<Brewery[]> {
     return this.http.get<Brewery[]>(this.breweriesUrl, this.authOptions)
+  }
+
+  addNew(newBrewery: NewBrewery): Observable<Brewery> {
+    return this.http.post<Brewery>(this.breweriesUrl, {brewery: newBrewery}, this.authOptions )
   }
 
 }

@@ -16,7 +16,6 @@ import {
 export class BeerEffects {
  
     loadBeers$ = createEffect(() => {
-        console.log('beer effect')
         return this.actions$.pipe(
         ofType(loadBeers),
         mergeMap(() => this.beerService.getBeers()

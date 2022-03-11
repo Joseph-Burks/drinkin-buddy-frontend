@@ -2,7 +2,7 @@ import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { logInError } from '../../store/app.store';
+import { errorMessage } from '../../store/app.store';
 import { logInUser } from '../../store/actions/user.actions'
 
 @Component({
@@ -14,7 +14,7 @@ import { logInUser } from '../../store/actions/user.actions'
 export class LoginComponent implements OnInit {
   username = ''
   password = ''
-  errorMessage$: Observable<string> = this._store.select(logInError)
+  errorMessage$: Observable<string> = this._store.select(errorMessage)
 
   constructor(
     private _store: Store
