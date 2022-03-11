@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { User } from '../../models/user'
-import { selectUsername } from '../../store/app.store';
+import { username } from '../../store/app.store';
 
 
 @Component({
@@ -12,7 +12,7 @@ import { selectUsername } from '../../store/app.store';
   styleUrls: [ './dashboard.component.css' ]
 })
 export class DashboardComponent implements OnInit {
-  username$ = this._store.select(selectUsername)
+  username$ = this._store.select(username)
 
   constructor(
     private _store: Store

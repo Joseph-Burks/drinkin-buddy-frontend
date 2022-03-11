@@ -1,5 +1,12 @@
-<h1>{{ breweriesLoaded$ | async }}</h1>
+<div id="search-component">
+    <label for="filter">Brewery Search</label>
+    <input #filterInput id="filter" (input)="filter(filterInput.value)" />
+</div>
 
+<button (click)='goToAddBrewery()'>Add a Brewery</button>
+<router-outlet></router-outlet>
+
+<h1 *ngIf='breweriesLoading$ | async'>Loading...</h1>
 
 <ul class='breweries'>
 
@@ -11,3 +18,5 @@
     </li>
 
 </ul>
+
+

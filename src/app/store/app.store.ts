@@ -2,9 +2,11 @@ import { createReducer, createSelector, createFeatureSelector, on, props } from 
 
 import * as userActions from './actions/user.actions'
 import * as breweryActions from './actions/brewery.actions'
+import * as beerActions from './actions/beer.actions'
 
 import { User } from '../models/user';
 import { Brewery } from '../models/brewery';
+import { Beer } from '../models/beer';
 
 
 // reducer
@@ -24,6 +26,11 @@ interface AppState {
     breweriesLoaded: boolean;
     breweries: Brewery[];
     breweriesFilter: string;
+
+    beersLoading: boolean;
+    beersLoaded: boolean;
+    beers: Beer[];
+    beersFilter: string;
 }
 
 const initialState: AppState = {
@@ -39,21 +46,35 @@ const initialState: AppState = {
     breweriesLoading: false,
     breweriesLoaded: false,
     breweries: [],
-    breweriesFilter: ''
+    breweriesFilter: '',
+
+    beersLoading: false,
+    beersLoaded: false,
+    beers: [],
+    beersFilter: ''
 }
 
 export const appReducer = createReducer<AppState>(
     initialState,
     on(userActions.signUpUser, (state, props) => ({...state, usernameIput: props.usernameInput, passwordInput: props.passwordInput, userLoading: true})),
     on(userActions.signUpUserFail, (state, props) => ({...state, usernameError: props.usernameError, passwordError: props.passwordError, userLoading: false})),
+    on(userActions.loadUserWithToken, (state, props) => ({...state, userLoading: true})),
     on(userActions.logInUser, (state, props) => ({...state, usernameIput: props.usernameInput, passwordInput: props.passwordInput, userLoading: true})),
     on(userActions.userLoadedFail, (state, props) => ({...state, logInError: props.error, userLoading: false})),
     on(userActions.userLoadedSuccess, (state, User) => ({...state, user: User, userLoading: false, userLoaded: true, usernameError: '', passwordError: ''})),
     on(userActions.logOutUser, () => initialState),
+
     on(breweryActions.loadBreweries, (state) => ({...state, breweriesLoading: true})),
     on(breweryActions.loadBreweriesFail, (state) => ({...state, breweriesLoading: false, breweriesLoaded: false})),
     on(breweryActions.loadBreweriesSuccess, (state, props) => ({...state, breweriesLoading: false, breweriesLoaded: true, breweries: props.breweries})),
     on(breweryActions.filterBreweries, (state, props) => ({ ...state, breweriesFilter: props.filter})),
+
+    on(beerActions.loadBeers, (state) => ({...state, beersLoading: true})),
+    on(beerActions.loadBeersFail, (state) => ({...state, beersLoading: false, beersLoaded: false})),
+    on(beerActions.loadBeersSuccess, (state, props) => ({...state, beersLoading: false, beersLoaded: true, beers: props.beers})),
+    on(beerActions.filterBeers, (state, props) => ({ ...state, beersFilter: props.filter})),
+
+
 )
 
 
@@ -130,6 +151,23 @@ export const breweriesLoaded = createSelector(
 
 export const breweries = createSelector(
     appFeatureSelector,
-    (appState) => appState.breweries.filter(brewery => brewery.name.startsWith(appState.breweriesFilter))
+    (appState) => appState.breweries.filter(brewery => brewery.name.toLowerCase().startsWith(appState.breweriesFilter))
+)
+
+// Beers
+
+export const beersLoading = createSelector(
+    appFeatureSelector,
+    (appState) => appState.beersLoading
+)
+
+export const beersLoaded = createSelector(
+    appFeatureSelector,
+    (appState) => appState.beersLoaded
+)
+
+export const beers = createSelector(
+    appFeatureSelector,
+    (appState) => appState.beers.filter(beer => beer.name.toLowerCase().startsWith(appState.beersFilter))
 )
 

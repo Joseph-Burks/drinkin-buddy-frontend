@@ -30,9 +30,6 @@ export class UserService {
 
   getUser(): Observable<User> {
     return this.http.get<User>(this.userTokenUrl, this.authOptions)
-      .pipe(
-        catchError(this.handleError<User>('getBeers'))
-      )
   }
 
   signUp(newUser: any): Observable<any> {
@@ -43,14 +40,4 @@ export class UserService {
     return this.http.post<any>(this.userLogInUrl, userInfo, this.httpOptions)
   }
 
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-  
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
-  
-      // Let the app keep running by returning an empty result.
-      return of(error as T);
-    }
-  }
 }

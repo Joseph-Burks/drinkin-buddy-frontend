@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
-import { logOutUser, selectUserId } from 'src/app/store/app.store';
+import { logOutUser } from '../../store/actions/user.actions';
+import { userLoaded } from '../../store/app.store';
 
 @Component({
   selector: 'app-navigation',
@@ -10,7 +11,7 @@ import { logOutUser, selectUserId } from 'src/app/store/app.store';
   styleUrls: ['./navigation.component.css']
 })
 export class NavigationComponent implements OnInit {
-  userId$ = this._store.select(selectUserId)
+  userLoaded$ = this._store.select(userLoaded)
 
   constructor(
     private router: Router,
@@ -18,11 +19,10 @@ export class NavigationComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.userId$)
   }
 
-  goToBreweries(): void {
-    this.router.navigate(['/breweries'])
+  navigate(route: string): void {
+    this.router.navigate([route])
   }
 
   logOut(): void {

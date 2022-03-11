@@ -3,7 +3,7 @@ import { Router } from "@angular/router";
 import { Store } from '@ngrx/store'
 ;
 import { UserService } from './services/user.service';
-import { userLoadedSuccess } from './store/app.store';
+import { loadUserWithToken, userLoadedSuccess } from './store/actions/user.actions';
 
 @Component({
   selector: 'app-root',
@@ -21,12 +21,8 @@ export class AppComponent implements OnInit {
     }
   }
 
-  getUser(): void {this.userService.getUser()
-    .subscribe((user) => {
-      if(user.username){
-        this._store.dispatch(userLoadedSuccess(user))
-        this.router.navigate(['/dashboard'])
-      }
-    });
+  getUser(): void {
+    this._store.dispatch(loadUserWithToken())
+    this.router.navigate(['/dashboard'])
   }
 }

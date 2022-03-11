@@ -1,25 +1,26 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { EMPTY } from 'rxjs';
+import { EMPTY, of } from 'rxjs';
 import { map, mergeMap, catchError } from 'rxjs/operators';
 
 import { BreweryService } from '../../services/brewery.service';
 
 import {
+    loadBreweries,
     loadBreweriesFail,
     loadBreweriesSuccess
-} from '../app.store';
+} from '../actions/brewery.actions';
 
  
 @Injectable()
 export class BreweryEffects {
  
     loadBreweries$ = createEffect(() => this.actions$.pipe(
-        ofType('[Breweries Component] Load Breweries'),
+        ofType(loadBreweries),
         mergeMap(() => this.breweryService.getAll()
             .pipe(
                 map(breweries => loadBreweriesSuccess({breweries})),
-                catchError(() => EMPTY)
+                catchError(() => of(loadBreweriesFail()))
             )
         )
     ));

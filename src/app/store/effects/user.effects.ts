@@ -9,12 +9,13 @@ import { UserService } from '../../services/user.service';
 import { SuccessfulUserResponse } from '../../models/successfulUserResponse';
 
 import {
+    loadUserWithToken,
     logInUser,
     signUpUser,
     signUpUserFail,
     userLoadedSuccess,
     userLoadedFail
-} from '../app.store';
+} from '../actions/user.actions';
 
  
 @Injectable()
@@ -45,6 +46,16 @@ export class UserEffects {
         mergeMap((action) => this.userService.logIn({ user: {username: action.usernameInput, password: action.passwordInput }})
             .pipe(
                 map(response => this.succesfullLogIn(response)),
+                catchError(response => of(userLoadedFail({ error: response.error })))
+            )
+        )
+    ));
+
+    loadUser$ = createEffect(() => this.actions$.pipe(
+        ofType(loadUserWithToken),
+        mergeMap(() => this.userService.getUser()
+            .pipe(
+                map(user => userLoadedSuccess(user)),
                 catchError(response => of(userLoadedFail({ error: response.error })))
             )
         )

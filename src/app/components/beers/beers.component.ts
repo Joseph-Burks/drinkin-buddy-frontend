@@ -1,8 +1,17 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
-import { Beer } from '../../models/beer'
-import { BeerService } from '../../services/beer.service';
-import { MessageService } from '../../services/message.service';
+import { Beer } from '../../models/beer';
+
+import { 
+  beersLoading,
+  beersLoaded,
+  beers,
+  
+} from '../../store/app.store';
+import { loadBeers, filterBeers } from '../../store/actions/beer.actions'
+
 
 @Component({
   selector: 'app-beers',
@@ -10,31 +19,21 @@ import { MessageService } from '../../services/message.service';
   styleUrls: ['./beers.component.css']
 })
 export class BeersComponent implements OnInit {
-  beers: Beer[] = []
+  beers$: Observable<Beer[]> = this._store.select(beers)
+  beersLoading$: Observable<boolean> = this._store.select(beersLoading)
 
-  constructor(private beerService: BeerService, private messageService: MessageService) { }
+  constructor(private _store: Store) { }
 
   ngOnInit(): void {
     this.getBeers()
   }
 
   getBeers(): void {
-    this.beerService.getBeers()
-      .subscribe(beers => this.beers = beers)
+    this._store.dispatch(loadBeers())
   }
 
-  add(name: string): void {
-    name = name.trim();
-    if (!name) { return; }
-    this.beerService.addBeer({ name } as Beer)
-      .subscribe(beer => {
-        this.beers.push(beer);
-      });
-  }
-
-  delete(beer: Beer): void {
-    this.beers = this.beers.filter(b => b !== beer);
-    this.beerService.deleteBeer(beer.id).subscribe();
+  filter(term: string): void {
+    this._store.dispatch(filterBeers({filter: term.toLowerCase()}))
   }
 
 }

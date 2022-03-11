@@ -17,7 +17,6 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { BeersComponent } from './components/beers/beers.component';
 import { BeerDetailsComponent } from './components/beer-details/beer-details.component';
 import { MessagesComponent } from './components/messages/messages.component';
-import { BeerSearchComponent } from './components/beer-search/beer-search.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { BreweriesComponent } from './components/breweries/breweries.component';
 import { AddBreweryComponent } from './components/breweries/add-brewery/add-brewery.component';
@@ -26,6 +25,7 @@ import { UserService } from './services/user.service';
 import { appReducer, APP_FEATURE_NAME } from './store/app.store';
 import { UserEffects } from './store/effects/user.effects';
 import { BreweryEffects } from './store/effects/brewery.effects';
+import { BeerEffects } from './store/effects/beer.effects';
 
 @NgModule({
   declarations: [
@@ -37,7 +37,6 @@ import { BreweryEffects } from './store/effects/brewery.effects';
     BeersComponent,
     BeerDetailsComponent,
     MessagesComponent,
-    BeerSearchComponent,
     NavigationComponent,
     BreweriesComponent,
     AddBreweryComponent,
@@ -54,7 +53,7 @@ import { BreweryEffects } from './store/effects/brewery.effects';
       autoPause: true, // Pauses recording actions and state changes when the extension window is not open
     }),
     StoreModule.forRoot({[APP_FEATURE_NAME]: appReducer}),
-    EffectsModule.forRoot([UserEffects, BreweryEffects])
+    EffectsModule.forRoot([UserEffects, BreweryEffects, BeerEffects])
   ],
   providers: [UserService],
   bootstrap: [AppComponent]

@@ -20,24 +20,24 @@ export class BeerDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getBeer()
+    // this.getBeer()
   }
 
-  getBeer(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.beerService.getBeer(id)
-      .subscribe(beer => this.beer = beer);
-  }
+  // getBeer(): void {
+  //   const id = Number(this.route.snapshot.paramMap.get('id'));
+  //   this.beerService.getBeer(id)
+  //     .subscribe(beer => this.beer = beer);
+  // }
 
-  goBack(): void {
-    this.location.back()
-  }
+  // goBack(): void {
+  //   this.location.back()
+  // }
 
-  save(): void {
-    if (this.beer) {
-      this.beerService.updateBeer(this.beer)
-        .subscribe(() => this.goBack());
-    }
-  }
+  // save(): void {
+  //   if (this.beer) {
+  //     this.beerService.updateBeer(this.beer)
+  //       .subscribe(() => this.goBack());
+  //   }
+  // }
 
 }

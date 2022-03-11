@@ -19,12 +19,9 @@ export class BreweryService {
     })
   };
 
-  constructor(
-    private http: HttpClient,
-  ) { }
+  constructor( private http: HttpClient ) { }
 
   getAll(): Observable<Brewery[]> {
-    console.log('getting breweries')
     return this.http.get<Brewery[]>(this.breweriesUrl, this.authOptions)
   }
 

@@ -12,4 +12,8 @@ export class AddBreweryComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  addBrewery(): void {
+    
+  }
+
 }
