@@ -4,13 +4,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { baseUrl } from '../baseUrl';
-import { Brewery, NewBrewery } from '../models/brewery';
+import { Brewery, NewBrewery, BreweryDetails } from '../models/brewery';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BreweryService {
-  private breweriesUrl = `${baseUrl}/breweries`
+  private breweriesUrl = `${baseUrl}/breweries/`
 
   authOptions = {
     headers: new HttpHeaders({
@@ -27,6 +27,11 @@ export class BreweryService {
 
   addNew(newBrewery: NewBrewery): Observable<Brewery> {
     return this.http.post<Brewery>(this.breweriesUrl, {brewery: newBrewery}, this.authOptions )
+  }
+
+  getBrewery(id: number): Observable<BreweryDetails> {
+    console.log(id)
+    return this.http.get<BreweryDetails>(this.breweriesUrl + `${id}`, this.authOptions )
   }
 
 }

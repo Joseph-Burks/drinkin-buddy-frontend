@@ -6,6 +6,7 @@ import * as beerActions from './actions/beer.actions'
 
 import { User } from '../models/user';
 import { Brewery } from '../models/brewery';
+import { BreweryDetails } from '../models/brewery';
 import { Beer } from '../models/beer';
 
 
@@ -27,6 +28,9 @@ interface AppState {
     breweriesLoaded: boolean;
     breweries: Brewery[];
     breweriesFilter: string;
+    breweryLoading: boolean;
+    breweryLoaded: boolean;
+    brewery: BreweryDetails | null;
 
     beersLoading: boolean;
     beersLoaded: boolean;
@@ -49,6 +53,9 @@ const initialState: AppState = {
     breweriesLoaded: false,
     breweries: [],
     breweriesFilter: '',
+    breweryLoading: false,
+    breweryLoaded: false,
+    brewery: null,
 
     beersLoading: false,
     beersLoaded: false,
@@ -72,7 +79,10 @@ export const appReducer = createReducer<AppState>(
     on(breweryActions.filterBreweries, (state, props) => ({ ...state, breweriesFilter: props.filter})),
     on(breweryActions.addBreweryFail, (state, props) => ({...state, errorMessage: props.errorMessage})),
     on(breweryActions.addBrewerySuccess, (state, Brewery) => ({...state, breweries: [...state.breweries, Brewery], errorMessage: ''})),
-
+    on(breweryActions.loadBrewery, (state) => ({...state, breweryLoading: true, breweryLoaded: false})),
+    on(breweryActions.loadBreweryFail, (state, props) => ({...state, breweryLoading: false, errorMessage: props.errorMessage})),
+    on(breweryActions.loadBrewerySuccess, (state, Brewery) => ({...state, breweryLoading: false, breweryLoaded: true, brewery: Brewery})),
+    
     on(beerActions.loadBeers, (state) => ({...state, beersLoading: true})),
     on(beerActions.loadBeersFail, (state) => ({...state, beersLoading: false, beersLoaded: false})),
     on(beerActions.loadBeersSuccess, (state, props) => ({...state, beersLoading: false, beersLoaded: true, beers: props.beers})),
@@ -158,10 +168,90 @@ export const breweries = createSelector(
     (appState) => appState.breweries.filter(brewery => brewery.name.toLowerCase().startsWith(appState.breweriesFilter))
 )
 
-// export const brewery = createSelector(
-//     appFeatureSelector,
-//     (appState) => appState.breweries.filter(brewery => brewery.name.toLowerCase().startsWith(appState.breweriesFilter))
-// )
+export const breweryLoading = createSelector(
+    appFeatureSelector,
+    (appState) => appState.breweryLoading
+)
+
+export const breweryLoaded = createSelector(
+    appFeatureSelector,
+    (appState) => appState.breweryLoaded
+)
+
+export const brewery = createSelector(
+    appFeatureSelector,
+    (appState) => appState.brewery
+)
+
+export const breweryName = createSelector(
+    appFeatureSelector,
+    (appState) => {
+        if(appState.brewery){
+            return appState.brewery.name
+        }
+        return null
+    }
+)
+
+export const breweryAddress = createSelector(
+    appFeatureSelector,
+    (appState) => {
+        if(appState.brewery){
+            return `${appState.brewery.street}, ${appState.brewery.city}, ${appState.brewery.state}, ${appState.brewery.postal_code}`
+        }
+        return null
+    }
+)
+
+export const breweryLongitude = createSelector(
+    appFeatureSelector,
+    (appState) => {
+        if(appState.brewery){
+            return appState.brewery.longitude
+        }
+        return null
+    }
+)
+
+export const breweryLatitude = createSelector(
+    appFeatureSelector,
+    (appState) => {
+        if(appState.brewery){
+            return appState.brewery.latitude
+        }
+        return null
+    }
+)
+
+export const breweryPhone = createSelector(
+    appFeatureSelector,
+    (appState) => {
+        if(appState.brewery){
+            return appState.brewery.phone
+        }
+        return null
+    }
+)
+
+export const breweryURL = createSelector(
+    appFeatureSelector,
+    (appState) => {
+        if(appState.brewery){
+            return appState.brewery.url
+        }
+        return null
+    }
+)
+
+export const breweryBeers = createSelector(
+    appFeatureSelector,
+    (appState) => {
+        if(appState.brewery){
+            return appState.brewery.beers
+        }
+        return null
+    }
+)
 
 // Beers
 

@@ -14,6 +14,9 @@ import {
     addBrewery,
     addBreweryFail,
     addBrewerySuccess,
+    loadBrewery,
+    loadBreweryFail,
+    loadBrewerySuccess,
 } from '../actions/brewery.actions';
 
  
@@ -35,10 +38,26 @@ export class BreweryEffects {
         mergeMap((action) => this.breweryService.addNew(action)
             .pipe(
                 map(brewery => {
-                    //this.router.navigate('/breweries/:id')
+                    this.router.navigate([`/brewery/${brewery.id}`])
                     return addBrewerySuccess(brewery)
                 }),
                 catchError(response => (of(addBreweryFail({ errorMessage: response.error.name })))
+            )
+        )
+    )))
+
+    loadBrewery$ = createEffect(() => this.actions$.pipe(
+        ofType(loadBrewery),
+        mergeMap((action) => this.breweryService.getBrewery(action.id)
+            .pipe(
+                map(breweryDetails => {
+                    return loadBrewerySuccess(breweryDetails)
+                }),
+                catchError(response => {
+                    alert(response.error)
+                    this.router.navigate(['/breweries'])
+                    return of(loadBreweryFail({ errorMessage: response.error }))
+                }
             )
         )
     )))

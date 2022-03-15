@@ -1,1 +1,7 @@
-<p>brewery-details works!</p>
+<p>Brewery Details</p>
+<p>{{ breweryLoaded$ | async }}</p>
+<div *ngIf='breweryLoaded$ | async'>
+    <h1>{{ breweryName$ | async }}</h1>
+
+
+</div>

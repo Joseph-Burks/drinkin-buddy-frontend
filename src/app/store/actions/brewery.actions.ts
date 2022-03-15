@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 
-import { Brewery, NewBrewery } from '../../models/brewery'
+import { Brewery, NewBrewery, BreweryDetails } from '../../models/brewery'
 
 export const loadBreweries = createAction('[Breweries Component] Load Breweries')
 export const loadBreweriesFail = createAction('[Breweries API] Breweries Loaded Fail')
@@ -9,4 +9,8 @@ export const filterBreweries = createAction('[Breweries Component] Filter Brewer
 
 export const addBrewery = createAction('[Add Brewery Component] Add Brewery', props<NewBrewery>())
 export const addBreweryFail = createAction('[Breweries API] Add Brewery Fail', props<{errorMessage: string}>())
-export const addBrewerySuccess = createAction('[Breweries API] Add Brewery Success', props<Brewery>())
+export const addBrewerySuccess = createAction('[Breweries API] Get Brewery Success', props<Brewery>())
+
+export const loadBrewery = createAction('[Brewery Details Component] Load Brewery', props<{id: number}>())
+export const loadBreweryFail = createAction('[Breweries API] Load Brewery Fail', props<{errorMessage: string}>())
+export const loadBrewerySuccess = createAction('[Breweries API] Load Brewery Success', props<BreweryDetails>())
