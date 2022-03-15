@@ -26,6 +26,7 @@ import { appReducer, APP_FEATURE_NAME } from './store/app.store';
 import { UserEffects } from './store/effects/user.effects';
 import { BreweryEffects } from './store/effects/brewery.effects';
 import { BeerEffects } from './store/effects/beer.effects';
+import { BreweryDetailsComponent } from './components/brewery/brewery-details/brewery-details.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { BeerEffects } from './store/effects/beer.effects';
     NavigationComponent,
     BreweriesComponent,
     AddBreweryComponent,
+    BreweryDetailsComponent,
   ],
   imports: [
     BrowserModule,

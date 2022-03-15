@@ -7,6 +7,7 @@ import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { BreweriesComponent } from './components/brewery/breweries/breweries.component';
 import { AddBreweryComponent } from './components/brewery/add-brewery/add-brewery.component';
+import { BreweryDetailsComponent } from './components/brewery/brewery-details/brewery-details.component';
 import { BeersComponent } from './components/beers/beers.component';
 import { BeerDetailsComponent } from './components/beer-details/beer-details.component';
 
@@ -17,8 +18,9 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'breweries', component: BreweriesComponent },
   { path: 'new-brewery', component: AddBreweryComponent },
+  { path: 'brewery/:id', component: BreweryDetailsComponent},
   { path: 'beers', component: BeersComponent },
-  { path: 'detail/:id', component: BeerDetailsComponent},
+  { path: 'beer/:id', component: BeerDetailsComponent},
   { path: '**', component: LandingComponent}
 ];
 

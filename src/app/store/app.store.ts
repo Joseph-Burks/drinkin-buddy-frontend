@@ -158,6 +158,11 @@ export const breweries = createSelector(
     (appState) => appState.breweries.filter(brewery => brewery.name.toLowerCase().startsWith(appState.breweriesFilter))
 )
 
+// export const brewery = createSelector(
+//     appFeatureSelector,
+//     (appState) => appState.breweries.filter(brewery => brewery.name.toLowerCase().startsWith(appState.breweriesFilter))
+// )
+
 // Beers
 
 export const beersLoading = createSelector(
