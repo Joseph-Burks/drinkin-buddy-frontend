@@ -302,17 +302,17 @@ export const beerName = createSelector(
     }
 )
 
-export const beerBrewery = createSelector(
+export const beerBreweryName = createSelector(
     appFeatureSelector,
     (appState) => {
         if(appState.beer){
-            return appState.beer.brewery
+            return appState.beer.brewery.name
         }
         return null
     }
 )
 
-export const beerStyle = createSelector(
+export const beerStyleName = createSelector(
     appFeatureSelector,
     (appState) => {
         if(appState.beer){
@@ -352,3 +352,14 @@ export const beerIBU = createSelector(
     }
 )
 
+export const beerAverageRating = createSelector(
+    appFeatureSelector,
+    (appState) => {
+        if(appState.beer){
+            let total = 0
+            appState.beer.reviews.forEach(r => total += r.rating)
+            return total/appState.beer.reviews.length
+        }
+        return null
+    }
+)

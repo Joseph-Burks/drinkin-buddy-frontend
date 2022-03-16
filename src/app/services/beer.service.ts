@@ -11,7 +11,7 @@ import { Beer, BeerDetails } from '../models/beer'
   providedIn: 'root'
 })
 export class BeerService {
-  private beersUrl = `${baseUrl}/beers`
+  private beersUrl = `${baseUrl}/beers/`
 
   authOptions = {
     headers: new HttpHeaders({
@@ -27,7 +27,7 @@ export class BeerService {
   }
 
   getBeer(id: number): Observable<BeerDetails> {
-    return this.http.get<BeerDetails>(this.beersUrl + `${id}`)
+    return this.http.get<BeerDetails>(this.beersUrl + `${id}`, this.authOptions)
   }
 
   // updateBeer(beer: Beer): Observable<any> {

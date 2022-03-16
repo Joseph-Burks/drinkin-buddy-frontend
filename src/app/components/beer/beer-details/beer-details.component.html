@@ -1,1 +1,11 @@
-<p>beer-details works!</p>
+<p>Beer Details</p>
+<h2 *ngIf='beerLoading$ | async'>Loading...</h2>
+<div *ngIf='beerLoaded$ | async'>
+    <h1>{{ beerName$ | async }}</h1>
+    <h3 *ngIf='beerBreweryName$ | async' >Brewery: {{ beerBreweryName$ | async }}</h3>
+    <h3 *ngIf='beerStyleName$ | async' >Style: {{ beerStyleName$ | async }}</h3>
+    <h3 *ngIf='beerABV$ | async' >Alcohol Content: {{ beerABV$ | async }}% ABV</h3>
+    <h3 *ngIf='beerIBU$ | async' >Bitterness: {{ beerIBU$ | async }} IBU</h3>
+    <h3 *ngIf='beerAverageRating$ | async' >Average Rating: {{ beerAverageRating$ | async }}</h3>
+</div>
+
