@@ -41,15 +41,17 @@ export class BreweryDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private _store: Store
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.getBrewery()
   }
 
   getBrewery(): void {
+    console.log('Get Brewery')
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    loadBrewery({id})
+    console.log(`Loading brewery with id ${id}`)
+    this._store.dispatch(loadBrewery({id}))
   }
 
 }

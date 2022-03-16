@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { baseUrl } from '../baseUrl';
-import { Beer } from '../models/beer'
+import { Beer, BeerDetails } from '../models/beer'
 
 
 @Injectable({
@@ -23,14 +23,12 @@ export class BeerService {
   constructor( private http: HttpClient ) { }
 
   getBeers(): Observable<Beer[]> {
-    console.log('getting beers')
     return this.http.get<Beer[]>(this.beersUrl, this.authOptions)
   }
 
-  // getBeer(id: number): Observable<Beer> {
-  //   const url = `${this.beersUrl}/${id}`;
-  //   return this.http.get<Beer>(url)
-  // }
+  getBeer(id: number): Observable<BeerDetails> {
+    return this.http.get<BeerDetails>(this.beersUrl + `${id}`)
+  }
 
   // updateBeer(beer: Beer): Observable<any> {
   //   const url = `${this.beersUrl}/${beer.id}`;

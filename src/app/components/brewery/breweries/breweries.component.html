@@ -9,10 +9,10 @@
 
 <ul class='breweries'>
 
-    <li *ngFor="let brewery of breweries$ | async">
-        <a routerLink='/brewery/{{brewery.id}}'>
+    <li *ngFor="let brewery of breweries$ | async" (click)='goToBrewery(brewery.id)'>
+        
             <span class='badge'>{{ brewery.id }}</span> {{ brewery.name }}
-        </a>
+        
     </li>
 
 </ul>

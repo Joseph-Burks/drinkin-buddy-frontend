@@ -8,8 +8,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { BreweriesComponent } from './components/brewery/breweries/breweries.component';
 import { AddBreweryComponent } from './components/brewery/add-brewery/add-brewery.component';
 import { BreweryDetailsComponent } from './components/brewery/brewery-details/brewery-details.component';
-import { BeersComponent } from './components/beers/beers.component';
-import { BeerDetailsComponent } from './components/beer-details/beer-details.component';
+import { BeersComponent } from './components/beer/beers/beers.component';
+import { BeerDetailsComponent } from './components/beer/beer-details/beer-details.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent },

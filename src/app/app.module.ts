@@ -14,23 +14,24 @@ import { LandingComponent } from './components/landing/landing.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { BeersComponent } from './components/beers/beers.component';
-import { BeerDetailsComponent } from './components/beer-details/beer-details.component';
+import { BeersComponent } from './components/beer/beers/beers.component';
+import { BeerDetailsComponent } from './components/beer/beer-details/beer-details.component';
 import { MessagesComponent } from './components/messages/messages.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { BreweriesComponent } from './components/brewery/breweries/breweries.component';
 import { AddBreweryComponent } from './components/brewery/add-brewery/add-brewery.component';
+import { BreweryDetailsComponent } from './components/brewery/brewery-details/brewery-details.component';
 
 import { UserService } from './services/user.service';
 import { appReducer, APP_FEATURE_NAME } from './store/app.store';
 import { UserEffects } from './store/effects/user.effects';
 import { BreweryEffects } from './store/effects/brewery.effects';
 import { BeerEffects } from './store/effects/beer.effects';
-import { BreweryDetailsComponent } from './components/brewery/brewery-details/brewery-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    NavigationComponent,
     LandingComponent,
     SignupComponent,
     LoginComponent,
@@ -38,7 +39,6 @@ import { BreweryDetailsComponent } from './components/brewery/brewery-details/br
     BeersComponent,
     BeerDetailsComponent,
     MessagesComponent,
-    NavigationComponent,
     BreweriesComponent,
     AddBreweryComponent,
     BreweryDetailsComponent,

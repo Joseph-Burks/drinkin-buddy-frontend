@@ -46,7 +46,9 @@ export class BreweryEffects {
         )
     )))
 
-    loadBrewery$ = createEffect(() => this.actions$.pipe(
+    loadBrewery$ = createEffect(() => {
+        console.log('load brewery')
+        return this.actions$.pipe(
         ofType(loadBrewery),
         mergeMap((action) => this.breweryService.getBrewery(action.id)
             .pipe(
@@ -60,7 +62,7 @@ export class BreweryEffects {
                 }
             )
         )
-    )))
+    ))})
  
     constructor(
         private actions$: Actions,

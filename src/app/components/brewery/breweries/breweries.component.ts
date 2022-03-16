@@ -27,6 +27,7 @@ export class BreweriesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllBreweries()
+    this._store.dispatch(filterBreweries({filter: ''}))
   }
 
   getAllBreweries(): void {
@@ -43,6 +44,11 @@ export class BreweriesComponent implements OnInit {
 
   goToAddBrewery(): void {
     this.router.navigate(['/new-brewery'])
+  }
+
+  goToBrewery(id: number): void {
+    
+    this.router.navigate([`/brewery/${id}`])
   }
 
 }

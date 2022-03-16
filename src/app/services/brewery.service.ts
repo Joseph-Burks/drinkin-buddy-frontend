@@ -30,7 +30,6 @@ export class BreweryService {
   }
 
   getBrewery(id: number): Observable<BreweryDetails> {
-    console.log(id)
     return this.http.get<BreweryDetails>(this.breweriesUrl + `${id}`, this.authOptions )
   }
 

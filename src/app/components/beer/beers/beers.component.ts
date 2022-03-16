@@ -2,15 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { Beer } from '../../models/beer';
+import { Beer } from '../../../models/beer';
 
 import { 
   beersLoading,
   beersLoaded,
   beers,
   
-} from '../../store/app.store';
-import { loadBeers, filterBeers } from '../../store/actions/beer.actions'
+} from '../../../store/app.store';
+import { loadBeers, filterBeers } from '../../../store/actions/beer.actions'
 
 
 @Component({

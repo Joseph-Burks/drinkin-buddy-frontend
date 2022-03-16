@@ -1,7 +1,15 @@
 <p>Brewery Details</p>
-<p>{{ breweryLoaded$ | async }}</p>
+<h2 *ngIf='breweryLoading$ | async'>Loading...</h2>
 <div *ngIf='breweryLoaded$ | async'>
     <h1>{{ breweryName$ | async }}</h1>
-
-
+    <h3 *ngIf='breweryAddress$ | async' >{{ breweryAddress$ | async }}</h3>
+    <h3 *ngIf='breweryPhone$ | async' >Phone: {{ breweryPhone$ | async }}</h3>
+    <h3 *ngIf='breweryURL$ | async' >Website: {{ breweryURL$ | async }}</h3>
 </div>
+<h3>Beers</h3>
+<ul id='breweryBeers'>
+    <li *ngFor="let beer of breweryBeers$ | async">
+        <span class='badge'>{{ beer.id }}</span> {{ beer.name }}
+    </li>
+
+</ul>
