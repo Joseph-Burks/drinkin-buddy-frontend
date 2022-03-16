@@ -48,9 +48,7 @@ export class BreweryDetailsComponent implements OnInit {
   }
 
   getBrewery(): void {
-    console.log('Get Brewery')
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    console.log(`Loading brewery with id ${id}`)
     this._store.dispatch(loadBrewery({id}))
   }
 

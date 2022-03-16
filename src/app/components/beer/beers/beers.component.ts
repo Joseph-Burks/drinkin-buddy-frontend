@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router'
 
 import { Beer } from '../../../models/beer';
 
@@ -22,7 +23,7 @@ export class BeersComponent implements OnInit {
   beers$: Observable<Beer[]> = this._store.select(beers)
   beersLoading$: Observable<boolean> = this._store.select(beersLoading)
 
-  constructor(private _store: Store) { }
+  constructor( private router: Router, private _store: Store) { }
 
   ngOnInit(): void {
     this.getBeers()
@@ -34,6 +35,10 @@ export class BeersComponent implements OnInit {
 
   filter(term: string): void {
     this._store.dispatch(filterBeers({filter: term.toLowerCase()}))
+  }
+
+  goToBeer(id: number): void {
+    this.router.navigate([`beer/${id}`])
   }
 
 }

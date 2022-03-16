@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { ActivatedRoute } from '@angular/router';
+
+import { loadBeer } from '../../../store/actions/beer.actions'
 
 @Component({
   selector: 'app-beer-details',
@@ -7,9 +11,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BeerDetailsComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute,
+    private _store: Store
+  ) {}
 
   ngOnInit(): void {
+    this.getBeer()
+  }
+
+  getBeer(): void {
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    this._store.dispatch(loadBeer({id}))
   }
 
 }

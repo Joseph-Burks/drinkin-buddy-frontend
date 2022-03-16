@@ -7,10 +7,8 @@
 
 <ul class='beers'>
 
-    <li *ngFor="let beer of beers$ | async">
-        <!-- <a routerLink='/detail/{{beer.id}}'> -->
+    <li *ngFor="let beer of beers$ | async" (click)='goToBeer(beer.id)'>
         <span class='badge'>{{ beer.id }}</span> {{ beer.name }}
-        <!-- </a> -->
     </li>
 
 </ul>

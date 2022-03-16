@@ -5,9 +5,8 @@ import * as breweryActions from './actions/brewery.actions'
 import * as beerActions from './actions/beer.actions'
 
 import { User } from '../models/user';
-import { Brewery } from '../models/brewery';
-import { BreweryDetails } from '../models/brewery';
-import { Beer } from '../models/beer';
+import { Brewery, BreweryDetails } from '../models/brewery';
+import { Beer, BeerDetails } from '../models/beer';
 
 
 // reducer
@@ -36,6 +35,9 @@ interface AppState {
     beersLoaded: boolean;
     beers: Beer[];
     beersFilter: string;
+    beerLoading: boolean;
+    beerLoaded: boolean;
+    beer: BeerDetails | null;
 }
 
 const initialState: AppState = {
@@ -60,7 +62,10 @@ const initialState: AppState = {
     beersLoading: false,
     beersLoaded: false,
     beers: [],
-    beersFilter: ''
+    beersFilter: '',
+    beerLoading: false,
+    beerLoaded: false,
+    beer: null,
 }
 
 export const appReducer = createReducer<AppState>(
@@ -87,7 +92,9 @@ export const appReducer = createReducer<AppState>(
     on(beerActions.loadBeersFail, (state) => ({...state, beersLoading: false, beersLoaded: false})),
     on(beerActions.loadBeersSuccess, (state, props) => ({...state, beersLoading: false, beersLoaded: true, beers: props.beers})),
     on(beerActions.filterBeers, (state, props) => ({ ...state, beersFilter: props.filter})),
-
+    on(beerActions.loadBeer, (state) => ({...state, beerLoading: true, beerLoaded: false})),
+    on(beerActions.loadBeerFail, (state, props) => ({...state, beerLoading: false, errorMessage: props.errorMessage})),
+    on(beerActions.loadBeerSuccess, (state, Beer) => ({...state, beerLoading: false, beerLoaded: true, beer: Beer})),
 
 )
 
@@ -268,5 +275,80 @@ export const beersLoaded = createSelector(
 export const beers = createSelector(
     appFeatureSelector,
     (appState) => appState.beers.filter(beer => beer.name.toLowerCase().startsWith(appState.beersFilter))
+)
+
+export const beerLoading = createSelector(
+    appFeatureSelector,
+    (appState) => appState.beerLoading
+)
+
+export const beerLoaded = createSelector(
+    appFeatureSelector,
+    (appState) => appState.beerLoaded
+)
+
+export const beer = createSelector(
+    appFeatureSelector,
+    (appState) => appState.beer
+)
+
+export const beerName = createSelector(
+    appFeatureSelector,
+    (appState) => {
+        if(appState.beer){
+            return appState.beer.name
+        }
+        return null
+    }
+)
+
+export const beerBrewery = createSelector(
+    appFeatureSelector,
+    (appState) => {
+        if(appState.beer){
+            return appState.beer.brewery
+        }
+        return null
+    }
+)
+
+export const beerStyle = createSelector(
+    appFeatureSelector,
+    (appState) => {
+        if(appState.beer){
+            return appState.beer.style.name
+        }
+        return null
+    }
+)
+
+export const beerDescription = createSelector(
+    appFeatureSelector,
+    (appState) => {
+        if(appState.beer){
+            return appState.beer.description
+        }
+        return null
+    }
+)
+
+export const beerABV = createSelector(
+    appFeatureSelector,
+    (appState) => {
+        if(appState.beer){
+            return appState.beer.alcohol_content
+        }
+        return null
+    }
+)
+
+export const beerIBU = createSelector(
+    appFeatureSelector,
+    (appState) => {
+        if(appState.beer){
+            return appState.beer.bitterness
+        }
+        return null
+    }
 )
 

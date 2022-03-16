@@ -3,6 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { map, mergeMap, catchError } from 'rxjs/operators';
 import { Router } from "@angular/router";
+import { Location } from '@angular/common';
 
 
 import { BreweryService } from '../../services/brewery.service';
@@ -57,7 +58,7 @@ export class BreweryEffects {
                 }),
                 catchError(response => {
                     alert(response.error)
-                    this.router.navigate(['/breweries'])
+                    this._location.back()
                     return of(loadBreweryFail({ errorMessage: response.error }))
                 }
             )
@@ -68,5 +69,6 @@ export class BreweryEffects {
         private actions$: Actions,
         private breweryService: BreweryService,
         private router: Router,
+        private _location: Location
     ) {}
 }
