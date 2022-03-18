@@ -9,6 +9,7 @@ import { BreweriesComponent } from './components/brewery/breweries/breweries.com
 import { AddBreweryComponent } from './components/brewery/add-brewery/add-brewery.component';
 import { BreweryDetailsComponent } from './components/brewery/brewery-details/brewery-details.component';
 import { BeersComponent } from './components/beer/beers/beers.component';
+import { AddBeerComponent } from './components/beer/add-beer/add-beer.component';
 import { BeerDetailsComponent } from './components/beer/beer-details/beer-details.component';
 
 const routes: Routes = [
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'new-brewery', component: AddBreweryComponent },
   { path: 'brewery/:id', component: BreweryDetailsComponent},
   { path: 'beers', component: BeersComponent },
+  { path: 'new-beer', component: AddBeerComponent },
   { path: 'beer/:id', component: BeerDetailsComponent},
   { path: '**', component: LandingComponent}
 ];

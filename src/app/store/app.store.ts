@@ -92,6 +92,8 @@ export const appReducer = createReducer<AppState>(
     on(beerActions.loadBeersFail, (state) => ({...state, beersLoading: false, beersLoaded: false})),
     on(beerActions.loadBeersSuccess, (state, props) => ({...state, beersLoading: false, beersLoaded: true, beers: props.beers})),
     on(beerActions.filterBeers, (state, props) => ({ ...state, beersFilter: props.filter})),
+    on(beerActions.addBeerFail, (state, props) => ({...state, errorMessage: props.errorMessage})),
+    on(beerActions.addBeerSuccess, (state, Beer) => ({...state, beer: Beer, errorMessage: ''})),
     on(beerActions.loadBeer, (state) => ({...state, beerLoading: true, beerLoaded: false})),
     on(beerActions.loadBeerFail, (state, props) => ({...state, beerLoading: false, errorMessage: props.errorMessage})),
     on(beerActions.loadBeerSuccess, (state, Beer) => ({...state, beerLoading: false, beerLoaded: true, beer: Beer})),
@@ -188,6 +190,16 @@ export const breweryLoaded = createSelector(
 export const brewery = createSelector(
     appFeatureSelector,
     (appState) => appState.brewery
+)
+
+export const breweryId = createSelector(
+    appFeatureSelector,
+    (appState) => {
+        if(appState.brewery){
+            return appState.brewery.id
+        }
+        return null
+    }
 )
 
 export const breweryName = createSelector(
@@ -316,7 +328,7 @@ export const beerStyleName = createSelector(
     appFeatureSelector,
     (appState) => {
         if(appState.beer){
-            return appState.beer.style.name
+            return appState.beer.style
         }
         return null
     }

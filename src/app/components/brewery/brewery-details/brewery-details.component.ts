@@ -2,10 +2,13 @@ import { Store } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog'
 
 import { BreweryDetails } from '../../../models/brewery';
 import { Beer } from '../../../models/beer';
-import { 
+import { AddBeerComponent } from '../../beer/add-beer/add-beer.component';
+import {
+  errorMessage,
   breweryLoading,
   breweryLoaded,
   breweryName,
@@ -26,6 +29,7 @@ import { loadBrewery } from '../../../store/actions/brewery.actions'
   styleUrls: ['./brewery-details.component.css']
 })
 export class BreweryDetailsComponent implements OnInit {
+  errorMessage$: Observable<string> = this._store.select(errorMessage)
   brewery$: Observable<BreweryDetails | null> = this._store.select(brewery)
   breweryLoading$: Observable<boolean> = this._store.select(breweryLoading)
   breweryLoaded$: Observable<boolean> = this._store.select(breweryLoaded)
@@ -40,7 +44,8 @@ export class BreweryDetailsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private _store: Store
+    private _store: Store,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -50,6 +55,17 @@ export class BreweryDetailsComponent implements OnInit {
   getBrewery(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this._store.dispatch(loadBrewery({id}))
+  }
+
+  toggleAddBeer(): void {
+    const dialogRef = this.breweryName$.subscribe(breweryName => this.dialog.open(AddBeerComponent, {
+      height: '50%',
+      width: '50%',
+      data: {
+        breweryId: Number(this.route.snapshot.paramMap.get('id')),
+        breweryName
+      }
+    }))
   }
 
 }

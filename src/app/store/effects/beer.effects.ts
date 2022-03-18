@@ -11,6 +11,9 @@ import {
     loadBeers,
     loadBeersFail,
     loadBeersSuccess,
+    addBeer,
+    addBeerFail,
+    addBeerSuccess,
     loadBeer,
     loadBeerFail,
     loadBeerSuccess
@@ -30,6 +33,22 @@ export class BeerEffects {
             )
         )
     )});
+
+    addBrewery$ = createEffect(() => this.actions$.pipe(
+        ofType(addBeer),
+        mergeMap((action) => this.beerService.addBeer(action)
+            .pipe(
+                map(beer => {
+                    this.router.navigate([`/beer/${beer.id}`])
+                    return addBeerSuccess(beer)
+                }),
+                catchError(response => {
+                    console.log(response)
+                    return of(addBeerFail({ errorMessage: response.error.name }))
+                }
+            )
+        )
+    )))
 
     loadBeer$ = createEffect(() => {
         return this.actions$.pipe(

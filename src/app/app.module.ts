@@ -8,6 +8,9 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { EffectsModule } from '@ngrx/effects';
+import { MatSliderModule } from '@angular/material/slider'
+import { MatDialogModule } from '@angular/material/dialog'
+import { MatInputModule } from '@angular/material/input';
 
 import { AppComponent } from './app.component';
 import { LandingComponent } from './components/landing/landing.component';
@@ -27,6 +30,7 @@ import { appReducer, APP_FEATURE_NAME } from './store/app.store';
 import { UserEffects } from './store/effects/user.effects';
 import { BreweryEffects } from './store/effects/brewery.effects';
 import { BeerEffects } from './store/effects/beer.effects';
+import { AddBeerComponent } from './components/beer/add-beer/add-beer.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +46,7 @@ import { BeerEffects } from './store/effects/beer.effects';
     BreweriesComponent,
     AddBreweryComponent,
     BreweryDetailsComponent,
+    AddBeerComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,7 +60,10 @@ import { BeerEffects } from './store/effects/beer.effects';
       autoPause: true, // Pauses recording actions and state changes when the extension window is not open
     }),
     StoreModule.forRoot({[APP_FEATURE_NAME]: appReducer}),
-    EffectsModule.forRoot([UserEffects, BreweryEffects, BeerEffects])
+    EffectsModule.forRoot([UserEffects, BreweryEffects, BeerEffects]),
+    MatSliderModule,
+    MatDialogModule,
+    MatInputModule,
   ],
   providers: [UserService],
   bootstrap: [AppComponent]

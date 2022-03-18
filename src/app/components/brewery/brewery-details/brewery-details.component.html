@@ -6,7 +6,7 @@
     <h3 *ngIf='breweryPhone$ | async' >Phone: {{ breweryPhone$ | async }}</h3>
     <h3 *ngIf='breweryURL$ | async' >Website: {{ breweryURL$ | async }}</h3>
 </div>
-<h3>Beers</h3>
+<h3>Beers</h3><button (click)="toggleAddBeer()">Add +</button><p class='error' *ngIf='errorMessage$ | async'>A beer brewed by {{ breweryName$ | async }} {{errorMessage$ | async}}</p>
 <ul id='breweryBeers'>
     <li *ngFor="let beer of breweryBeers$ | async">
         <span class='badge'>{{ beer.id }}</span> {{ beer.name }}

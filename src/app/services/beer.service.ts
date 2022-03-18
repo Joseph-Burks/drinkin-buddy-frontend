@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { baseUrl } from '../baseUrl';
-import { Beer, BeerDetails } from '../models/beer'
+import { Beer, BeerDetails, NewBeer } from '../models/beer'
 
 
 @Injectable({
@@ -30,14 +30,16 @@ export class BeerService {
     return this.http.get<BeerDetails>(this.beersUrl + `${id}`, this.authOptions)
   }
 
+  addBeer(beer: NewBeer): Observable<BeerDetails> {
+    console.log(beer)
+    return this.http.post<BeerDetails>(this.beersUrl, { beer }, this.authOptions)
+  }
+
   // updateBeer(beer: Beer): Observable<any> {
   //   const url = `${this.beersUrl}/${beer.id}`;
   //   return this.http.put(url, beer, this.authOptions)
   // }
 
-  // addBeer(beer: Beer): Observable<Beer> {
-  //   return this.http.post<Beer>(this.beersUrl, beer, this.authOptions)
-  // }
 
   // deleteBeer(id: number): Observable<Beer> {
   //   const url = `${this.beersUrl}/${id}`;
