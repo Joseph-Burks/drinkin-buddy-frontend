@@ -7,6 +7,9 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { EffectsModule } from '@ngrx/effects';
+
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
 import { MatSliderModule } from '@angular/material/slider'
 import { MatDialogModule } from '@angular/material/dialog'
 import { MatInputModule } from '@angular/material/input';
@@ -21,7 +24,6 @@ import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { BeersComponent } from './components/beer/beers/beers.component';
 import { BeerDetailsComponent } from './components/beer/beer-details/beer-details.component';
-import { MessagesComponent } from './components/messages/messages.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { BreweriesComponent } from './components/brewery/breweries/breweries.component';
 import { AddBreweryComponent } from './components/brewery/add-brewery/add-brewery.component';
@@ -46,7 +48,6 @@ import { AddReviewComponent } from './components/review/add-review/add-review.co
     DashboardComponent,
     BeersComponent,
     BeerDetailsComponent,
-    MessagesComponent,
     BreweriesComponent,
     AddBreweryComponent,
     BreweryDetailsComponent,
@@ -65,6 +66,9 @@ import { AddReviewComponent } from './components/review/add-review/add-review.co
     }),
     StoreModule.forRoot({[APP_FEATURE_NAME]: appReducer}),
     EffectsModule.forRoot([UserEffects, BreweryEffects, BeerEffects, ReviewEffects]),
+
+    MatCardModule,
+    MatButtonModule,
     MatSliderModule,
     MatDialogModule,
     MatInputModule,

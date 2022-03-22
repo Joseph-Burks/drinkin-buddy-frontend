@@ -17,7 +17,7 @@ export class LandingComponent implements OnInit {
 
   ngOnInit(): void {
     if(localStorage['token']){
-      //this.location.go('/dashboard')
+      this.location.go('/dashboard')
     }
   }
 

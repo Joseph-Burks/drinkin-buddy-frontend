@@ -1,19 +1,13 @@
-<div *ngIf="user">
-    <!-- <app-dashboard></app-dashboard> -->
-    
-</div>
-<div #elseBlock>
-    <div>
-        <p>Drinkin' Buddy is Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad 
-            minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea 
-            commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit 
-            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat 
-            non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </p>
-        <nav>
-            <a routerLink="/signup">Sign Up</a>
-            <a routerLink="/login">Log In</a>
-        </nav>
-    </div>
-</div>
+<mat-card id='landing-card'>
+    <p>Drinkin' Buddy is Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad 
+    minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea 
+    commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit 
+    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat 
+    non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </p>
+    <nav id='landing-nav'>
+        <a mat-raised-button class='button' routerLink="/signup">Sign Up</a>
+        <a mat-raised-button class='button' color='primary' routerLink="/login">Log In</a>
+    </nav>
+</mat-card>

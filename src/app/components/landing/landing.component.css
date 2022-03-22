@@ -1,0 +1,24 @@
+
+#landing-card {
+    display: flex;
+    flex-direction: column;
+    margin: 20%;
+    margin-left: 15%;
+    margin-right: 15%;
+    background-color: lavender;
+}
+
+#landing-nav {
+    display:flex;
+    justify-content: center;
+}
+.button {
+    margin: 8px 8px 8px 0;
+}
+
+@media screen and (max-width: 480px) {
+    #landing-card {
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+}
