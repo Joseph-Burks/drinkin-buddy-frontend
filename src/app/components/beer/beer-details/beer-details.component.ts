@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog'
 
 import { BeerDetails } from '../../../models/beer';
+import { AddReviewComponent } from '../../review/add-review/add-review.component';
 
 import { loadBeer } from '../../../store/actions/beer.actions'
 import {
@@ -36,7 +38,8 @@ export class BeerDetailsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private _store: Store
+    private _store: Store,
+    private dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -46,6 +49,18 @@ export class BeerDetailsComponent implements OnInit {
   getBeer(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this._store.dispatch(loadBeer({id}))
+  }
+
+  toggleAddReview(): void {
+    const dialogRef = this.beer$.subscribe(beer => this.dialog.open(AddReviewComponent, {
+      height: '50%',
+      width: '50%',
+      data: {
+        beerId: Number(this.route.snapshot.paramMap.get('id')),
+        beerName: beer ? beer.name : null,
+        breweryName: beer? beer.brewery.name : ''
+      }
+    }))
   }
 
 }

@@ -5,3 +5,10 @@ export interface Review {
     rating: number;
     note: string;
 }
+
+export interface NewReview {
+    user_id: number | null;
+    beer_id: number | null;
+    rating: number | null;
+    note: string;
+}

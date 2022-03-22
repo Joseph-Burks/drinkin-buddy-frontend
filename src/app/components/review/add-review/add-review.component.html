@@ -1,0 +1,25 @@
+<h1 mat-dialog-title>Add a review for {{data.beerName}} by {{data.breweryName}}</h1>
+<div mat-dialog-content>
+    <!-- <mat-form-field appearance="outline" [color]="colorControl"> -->
+      <mat-label>Rating: </mat-label>
+      <button mat-icon-button inline='true' *ngFor="let ratingId of ratingArr;index as i" [id]="'star_'+i" (click)="onClick(i+1)">
+        <mat-icon>
+          {{showIcon(i)}}
+        </mat-icon>
+      </button>
+      <!-- <mat-error *ngIf="rating == 0">
+        Rating <strong>required</strong> and cannot be zero
+      </mat-error> -->
+      <p class="body-2">
+          Your rated <span class="body-2">{{rating}}</span> / <span class="body-2">5</span>
+      </p>
+    <!-- </mat-form-field> -->
+    <mat-form-field appearance="outline" [color]="colorControl">
+      <mat-label>Note</mat-label>
+      <textarea matInput [(ngModel)]="note"></textarea>
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button (click)="addReview()" cdkFocusInitial>Add</button>
+</div>

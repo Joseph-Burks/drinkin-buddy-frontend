@@ -1,6 +1,6 @@
 import { Store } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog'
 
@@ -45,7 +45,8 @@ export class BreweryDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private _store: Store,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -66,6 +67,10 @@ export class BreweryDetailsComponent implements OnInit {
         breweryName
       }
     }))
+  }
+
+  goToBeer(id: number): void {
+    this.router.navigate([`beer/${id}`])
   }
 
 }

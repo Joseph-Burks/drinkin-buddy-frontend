@@ -8,8 +8,7 @@
 </div>
 <h3>Beers</h3><button (click)="toggleAddBeer()">Add +</button><p class='error' *ngIf='errorMessage$ | async'>A beer brewed by {{ breweryName$ | async }} {{errorMessage$ | async}}</p>
 <ul id='breweryBeers'>
-    <li *ngFor="let beer of breweryBeers$ | async">
+    <li *ngFor="let beer of breweryBeers$ | async" (click)='goToBeer(beer.id)'>
         <span class='badge'>{{ beer.id }}</span> {{ beer.name }}
     </li>
-
 </ul>

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
@@ -11,6 +10,9 @@ import { EffectsModule } from '@ngrx/effects';
 import { MatSliderModule } from '@angular/material/slider'
 import { MatDialogModule } from '@angular/material/dialog'
 import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
 import { AppComponent } from './app.component';
 import { LandingComponent } from './components/landing/landing.component';
@@ -30,7 +32,9 @@ import { appReducer, APP_FEATURE_NAME } from './store/app.store';
 import { UserEffects } from './store/effects/user.effects';
 import { BreweryEffects } from './store/effects/brewery.effects';
 import { BeerEffects } from './store/effects/beer.effects';
+import { ReviewEffects } from './store/effects/review.effects';
 import { AddBeerComponent } from './components/beer/add-beer/add-beer.component';
+import { AddReviewComponent } from './components/review/add-review/add-review.component';
 
 @NgModule({
   declarations: [
@@ -47,11 +51,11 @@ import { AddBeerComponent } from './components/beer/add-beer/add-beer.component'
     AddBreweryComponent,
     BreweryDetailsComponent,
     AddBeerComponent,
+    AddReviewComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    FormsModule,
     AppRoutingModule,
     HttpClientModule,
     StoreDevtoolsModule.instrument({
@@ -60,10 +64,14 @@ import { AddBeerComponent } from './components/beer/add-beer/add-beer.component'
       autoPause: true, // Pauses recording actions and state changes when the extension window is not open
     }),
     StoreModule.forRoot({[APP_FEATURE_NAME]: appReducer}),
-    EffectsModule.forRoot([UserEffects, BreweryEffects, BeerEffects]),
+    EffectsModule.forRoot([UserEffects, BreweryEffects, BeerEffects, ReviewEffects]),
     MatSliderModule,
     MatDialogModule,
     MatInputModule,
+    MatIconModule,
+    MatFormFieldModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]
