@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import { logOutUser } from '../../store/actions/user.actions';
-import { userLoaded } from '../../store/app.store';
+import { userLoaded, username } from '../../store/app.store';
 
 @Component({
   selector: 'app-navigation',
@@ -12,6 +12,7 @@ import { userLoaded } from '../../store/app.store';
 })
 export class NavigationComponent implements OnInit {
   userLoaded$ = this._store.select(userLoaded)
+  username$ = this._store.select(username)
 
   constructor(
     private router: Router,

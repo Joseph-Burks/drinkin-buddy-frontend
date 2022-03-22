@@ -1,8 +1,48 @@
-<p>navigation works!</p>
-
-<ng-container *ngIf="userLoaded$ | async">
-        <button >Reviews</button>
-        <button (click)="navigate('/breweries')">Breweries</button>
-        <button (click)="navigate('/beers')">Beers</button>
-        <button (click)='logOut()'>Log Out</button>
-</ng-container>
+<mat-toolbar id='nav-bar' color='primary'>
+        <ng-container *ngIf='userLoaded$ | async'>      
+                <button mat-icon-button [matMenuTriggerFor]="menu">
+                        <mat-icon color='accent'>menu</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                        <button mat-menu-item (click)="navigate('/dashboard')">
+                          <mat-icon color='primary'>home</mat-icon>
+                          <span>Home</span>
+                        </button>
+                        <button mat-menu-item (click)="navigate('/breweries')">
+                          <mat-icon color='primary'>create</mat-icon>
+                          <span>Review</span>
+                        </button>
+                        <button mat-menu-item (click)="navigate('/breweries')">
+                          <mat-icon color='primary'>place</mat-icon>
+                          <span>Breweries</span>
+                        </button>
+                        <button mat-menu-item (click)="navigate('/beers')">
+                          <mat-icon color='primary'>sports_bar</mat-icon>
+                          <span>Beers</span>
+                        </button>
+                </mat-menu>
+                <span id='title'>Drinkin' Buddy</span>
+                <span class="spacer"></span>
+                <span id='nav-username'>{{ username$ | async }}</span>
+                <button mat-icon-button >
+                        <mat-icon color='accent' [matMenuTriggerFor]="userMenu">account_circle</mat-icon>
+                </button>
+                <mat-menu #userMenu="matMenu" xPosition="before">
+                        <button mat-menu-item (click)="navigate('/dashboard')">
+                          <mat-icon color='primary'>logout</mat-icon>
+                          <span>Logout</span>
+                        </button>
+                        <button mat-menu-item>
+                          <mat-icon color='primary'>manage_accounts</mat-icon>
+                          <span>Acoount Settings</span>
+                        </button>
+                </mat-menu>
+                
+                <!-- <nav id='navigation'>
+                        <button >Reviews</button>
+                        <button (click)="navigate('/breweries')">Breweries</button>
+                        <button (click)="navigate('/beers')">Beers</button>
+                        <button (click)='logOut()'>Log Out</button>
+                </nav> -->
+        </ng-container>
+</mat-toolbar>

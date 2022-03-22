@@ -1,0 +1,15 @@
+#nav-bar {
+    background-color: primary;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+#title {
+    font-size: larger;
+}
+
+#nav-username {
+    font-size: medium;
+}
