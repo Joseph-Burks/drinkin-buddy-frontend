@@ -6,10 +6,25 @@
     flex: 1 1 auto;
 }
 
-#title {
+.title {
     font-size: larger;
+}
+
+.no-user {
+    margin-left: 15%;
 }
 
 #nav-username {
     font-size: medium;
+}
+
+@media screen and (max-width: 830px) {
+    .no-user {
+        margin-left: 5%;
+    }
+
+    #nav-Bar {
+        background-color: primary;
+        padding-left: 5%;
+    }
 }

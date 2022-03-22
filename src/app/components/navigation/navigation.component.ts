@@ -26,7 +26,7 @@ export class NavigationComponent implements OnInit {
     this.router.navigate([route])
   }
 
-  logOut(): void {
+  logout(): void {
     this._store.dispatch(logOutUser())
     localStorage.removeItem('token')
     this.router.navigate(['/'])
