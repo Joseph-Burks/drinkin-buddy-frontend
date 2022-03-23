@@ -1,11 +1,35 @@
-<div>
-    <p class="error" *ngIf="usernameErrorMessage$ | async">{{ usernameErrorMessage$ | async }}</p>
-    <p class="error" *ngIf="passwordErrorMessage$ | async">{{ passwordErrorMessage$ | async }}</p>
-    <label for="username" >Username: </label>
-    <input id="username" placeholder="Username" [(ngModel)]="username">
-    <label for="password">Password: </label>
-    <input id="password" type="password" placeholder="Password" [(ngModel)]="password">
-    <button (click)="signUp()">Sign Up</button>
+<mat-card id='sign-up-form-card'>
+    <form [formGroup]='userForm' (ngSubmit)="signUp()">
+        <mat-form-field appearance="outline">
+            <mat-label for="username" >Username </mat-label>
+            <input
+                matInput
+                required
+                class="example-full-width"
+                id='username'
+                placeholder="Username"
+                formControlName='username'
+            >
+            <mat-error *ngIf="userForm.invalid">{{ getUsernameErrorMessage() }}</mat-error>
+            <p color='red' class="error" *ngIf="usernameErrorMessage$ | async">{{ usernameErrorMessage$ | async }}</p>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label for="password">Password </mat-label>
+            <input
+                matInput
+                required
+                class="example-full-width"
+                id='password'
+                type="password"
+                placeholder="Password" 
+                formControlName='password'
+            >
+            <mat-error *ngIf="userForm.invalid">{{ getPasswordErrorMessage() }}</mat-error>
+            <!-- <mat-error class="error" *ngIf="passwordErrorMessage$ | async">{{ passwordErrorMessage$ | async }}</mat-error> -->
+        </mat-form-field>
+        <button mat-raised-button type="submit" [disabled]="!userForm.valid">Submit</button>
+    </form>
+    <!-- <button mat-raised-button (click)="signUp()">Sign Up</button> -->
     <p>Already signed up?</p>
     <a routerLink='/login'>Go to Log In</a>
-</div>
+</mat-card>

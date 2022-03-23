@@ -1,3 +1,22 @@
 .error {
     color: red;
 }
+
+#sign-up-form-card {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10%;
+    margin-left: 15%;
+    margin-right: 15%;
+    background-color: lavender;
+}
+
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.example-full-width {
+    width: 100%;
+}

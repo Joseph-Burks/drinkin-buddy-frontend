@@ -27,6 +27,7 @@ export class UserEffects {
             .pipe(
                 map(response => this.succesfullLogIn(response)),
                 catchError(response => {
+                    console.log(response)
                     let usernameError = ''
                     let passwordError = ''
                     if(response.error.username){
