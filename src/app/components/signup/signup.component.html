@@ -1,35 +1,38 @@
 <mat-card id='sign-up-form-card'>
-    <form [formGroup]='userForm' (ngSubmit)="signUp()">
-        <mat-form-field appearance="outline">
-            <mat-label for="username" >Username </mat-label>
+    <mat-card-title>Sign Up</mat-card-title>
+    <form id='form' [formGroup]='userForm' (ngSubmit)="signUp()">
+        <mat-form-field class="input" appearance="outline">
+            <mat-label>Username</mat-label>
             <input
                 matInput
                 required
-                class="example-full-width"
-                id='username'
                 placeholder="Username"
                 formControlName='username'
             >
             <mat-error *ngIf="userForm.invalid">{{ getUsernameErrorMessage() }}</mat-error>
-            <p color='red' class="error" *ngIf="usernameErrorMessage$ | async">{{ usernameErrorMessage$ | async }}</p>
+            <mat-error *ngIf="usernameErrorMessage$ | async">{{ usernameErrorMessage$ | async }}</mat-error>
         </mat-form-field>
-        <mat-form-field appearance="outline">
-            <mat-label for="password">Password </mat-label>
+        <mat-form-field class="input" appearance="outline">
+            <mat-label>Password</mat-label>
             <input
                 matInput
                 required
-                class="example-full-width"
-                id='password'
                 type="password"
                 placeholder="Password" 
                 formControlName='password'
             >
             <mat-error *ngIf="userForm.invalid">{{ getPasswordErrorMessage() }}</mat-error>
-            <!-- <mat-error class="error" *ngIf="passwordErrorMessage$ | async">{{ passwordErrorMessage$ | async }}</mat-error> -->
+            <mat-error *ngIf="passwordErrorMessage$ | async">{{ passwordErrorMessage$ | async }}</mat-error>
         </mat-form-field>
-        <button mat-raised-button type="submit" [disabled]="!userForm.valid">Submit</button>
+        <button mat-raised-button color='primary' type="submit" [disabled]="!userForm.valid">
+            <mat-icon color='accent'>login</mat-icon>
+            Sign Up
+        </button>
     </form>
-    <!-- <button mat-raised-button (click)="signUp()">Sign Up</button> -->
-    <p>Already signed up?</p>
-    <a routerLink='/login'>Go to Log In</a>
+    <mat-divider inset></mat-divider>
+    <mat-card-content id='content' >Already signed up?</mat-card-content>
+    <a mat-raised-button routerLink='/login'>
+        <mat-icon color='primary'>undo</mat-icon>
+        Log In Instead
+    </a>
 </mat-card>
