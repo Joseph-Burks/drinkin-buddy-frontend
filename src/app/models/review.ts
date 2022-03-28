@@ -13,6 +13,7 @@ export interface UserReview {
     rating: number;
     note: string;
     beer: Beer;
+    created: string
 }
 
 export interface NewReview {
