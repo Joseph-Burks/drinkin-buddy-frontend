@@ -1,48 +1,31 @@
-h2 {
-    text-align: center;
+#username {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5%;
+    width: 50%;
+    margin: 5% auto;
+    background-color: rgba(103,58,183,.15);
   }
-  
-  .beers-menu {
-    padding: 0;
-    margin: auto;
-    max-width: 1000px;
-  
-    /* flexbox */
+
+  #lists {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-content: flex-start;
-    align-items: flex-start;
+    align-items: center;
+    width: 80%;
+    margin: auto;
+  }
+
+  .list {
+    margin: 2% auto;
   }
   
-  a {
-    background-color: #3f525c;
-    border-radius: 2px;
-    padding: 1rem;
-    font-size: 1.2rem;
-    text-decoration: none;
-    display: inline-block;
-    color: #fff;
-    text-align: center;
-    width: 100%;
-    min-width: 70px;
-    margin: .5rem auto;
-    box-sizing: border-box;
-  
-    /* flexbox */
-    order: 0;
-    flex: 0 1 auto;
-    align-self: auto;
-  }
-  
-  @media (min-width: 600px) {
-    a {
-      width: 18%;
-      box-sizing: content-box;
+  @media (max-width: 830px) {
+    #username {
+    width: 80%;
     }
-  }
-  
-  a:hover {
-    background-color: #000;
+
+    #lists {
+      flex-direction: column;
+    }
   }

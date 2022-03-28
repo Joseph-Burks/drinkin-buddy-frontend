@@ -1,17 +1,17 @@
-<!-- <h2>Top Beers</h2>
-<div class="beers-menu">
-  <a *ngFor="let beer of beers" routerLink="/detail/{{beer.id}}">
-    {{beer.name}}
-  </a>
-</div>
-<app-beer-search></app-beer-search> -->
-<div>
-  <h1>Dashboard</h1>
-  <h2>{{ username$ | async }}</h2>
-</div>
-<div>
-  <button></button>
-</div>
-<div>
-  <h3>My Beers</h3>
+<mat-card id='username'>
+  <mat-card-title>{{ username$ | async }}</mat-card-title>
+</mat-card>
+
+<mat-divider inset></mat-divider>
+
+<div id='lists'>
+
+  <mat-card class='list'>
+    <mat-card-title>Beers of Interests</mat-card-title>
+  </mat-card>
+  
+  <mat-card class='list' >
+    <mat-card-title>Reviewed Beers</mat-card-title>
+  </mat-card>
+  
 </div>

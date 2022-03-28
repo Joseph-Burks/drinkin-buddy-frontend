@@ -8,7 +8,7 @@
     margin-top: 10%;
     margin-left: 15%;
     margin-right: 15%;
-    background-color: lavender;
+    background-color: rgba(103,58,183,.15);
 }
 
 #form {
@@ -31,6 +31,6 @@
         margin-top: 40%;
         margin-left: 5%;
         margin-right: 5%;
-        background-color: lavender;
+        background-color: rgba(103,58,183,.15);
     }
 }
