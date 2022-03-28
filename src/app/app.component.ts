@@ -23,6 +23,6 @@ export class AppComponent implements OnInit {
 
   getUser(): void {
     this._store.dispatch(loadUserWithToken())
-    this.router.navigate(['/dashboard'])
+    this.router.navigate(['/breweries'])
   }
 }

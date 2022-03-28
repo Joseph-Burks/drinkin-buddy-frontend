@@ -1,3 +1,36 @@
 .error {
     color: red;
 }
+
+#log-in-form-card {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10%;
+    margin-left: 15%;
+    margin-right: 15%;
+    background-color: lavender;
+}
+
+#form {
+    padding: 8px;
+    margin: 8px;
+}
+
+.input {
+    width: 100%
+}
+
+#content {
+    padding: 8px;
+}
+
+@media screen and (max-width: 830px) {
+    #sign-up-form-card {
+        display: flex;
+        flex-direction: column;
+        margin-top: 40%;
+        margin-left: 5%;
+        margin-right: 5%;
+        background-color: lavender;
+    }
+}

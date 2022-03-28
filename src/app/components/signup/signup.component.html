@@ -10,7 +10,6 @@
                 formControlName='username'
             >
             <mat-error *ngIf="userForm.invalid">{{ getUsernameErrorMessage() }}</mat-error>
-            <mat-error *ngIf="usernameErrorMessage$ | async">{{ usernameErrorMessage$ | async }}</mat-error>
         </mat-form-field>
         <mat-form-field class="input" appearance="outline">
             <mat-label>Password</mat-label>
@@ -22,7 +21,6 @@
                 formControlName='password'
             >
             <mat-error *ngIf="userForm.invalid">{{ getPasswordErrorMessage() }}</mat-error>
-            <mat-error *ngIf="passwordErrorMessage$ | async">{{ passwordErrorMessage$ | async }}</mat-error>
         </mat-form-field>
         <button mat-raised-button color='primary' type="submit" [disabled]="!userForm.valid">
             <mat-icon color='accent'>login</mat-icon>

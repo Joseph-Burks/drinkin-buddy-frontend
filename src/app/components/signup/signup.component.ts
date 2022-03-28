@@ -3,7 +3,6 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
-import { passwordError, usernameError } from 'src/app/store/app.store'
 import { signUpUser, signUpUserFail } from '../../store/actions/user.actions'
 
 @Component({
@@ -13,9 +12,6 @@ import { signUpUser, signUpUserFail } from '../../store/actions/user.actions'
 })
 
 export class SignupComponent implements OnInit {
-
-  usernameErrorMessage$: Observable<string> = this._store.select(usernameError)
-  passwordErrorMessage$: Observable<string> = this._store.select(passwordError)
 
   userForm = new FormGroup({
     username: new FormControl('', {
@@ -27,12 +23,6 @@ export class SignupComponent implements OnInit {
       updateOn: 'change'
     })
   })
-  //usernameFormControl = new FormControl(this.username, [Validators.required]);
-  // passwordFormControl = new FormControl(this.password, {
-  //   validators: [Validators.minLength(6), Validators.required],
-  //   updateOn: 'blur'
-  // });
-  
 
   constructor(
     private _store: Store

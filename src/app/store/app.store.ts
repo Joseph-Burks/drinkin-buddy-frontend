@@ -16,8 +16,6 @@ interface AppState {
 
     usernameInput: string;
     passwordInput: string;
-    usernameError: string;
-    passwordError: string;
     userLoading: boolean;
     userLoaded: boolean
     user: User | null;
@@ -45,8 +43,6 @@ const initialState: AppState = {
 
     usernameInput: '',
     passwordInput: '',
-    usernameError: '',
-    passwordError: '',
     userLoading: false,
     userLoaded: false,
     user: null,
@@ -71,10 +67,10 @@ const initialState: AppState = {
 export const appReducer = createReducer<AppState>(
     initialState,
     on(userActions.signUpUser, (state, props) => ({...state, usernameIput: props.usernameInput, passwordInput: props.passwordInput, userLoading: true})),
-    on(userActions.signUpUserFail, (state, props) => ({...state, usernameError: props.usernameError, passwordError: props.passwordError, userLoading: false})),
+    on(userActions.signUpUserFail, (state, props) => ({...state, usernameError: props.errorMessage, userLoading: false})),
     on(userActions.loadUserWithToken, (state, props) => ({...state, userLoading: true})),
     on(userActions.logInUser, (state, props) => ({...state, usernameIput: props.usernameInput, passwordInput: props.passwordInput, userLoading: true})),
-    on(userActions.userLoadedFail, (state, props) => ({...state, errorMessage: props.error, userLoading: false})),
+    on(userActions.userLoadedFail, (state, props) => ({...state, errorMessage: props.errorMessage, userLoading: false})),
     on(userActions.userLoadedSuccess, (state, User) => ({...state, user: User, userLoading: false, userLoaded: true, usernameError: '', passwordError: '', errorMessage: ''})),
     on(userActions.logOutUser, () => initialState),
 
@@ -138,16 +134,6 @@ export const userId = createSelector(
 export const passwordInput = createSelector(
     appFeatureSelector,
     (appState) => appState.passwordInput
-)
-    
-export const usernameError = createSelector(
-    appFeatureSelector,
-    (appState) => appState.usernameError
-)
-        
-export const passwordError = createSelector(
-    appFeatureSelector,
-    (appState) => appState.passwordError
 )
     
 export const usernameInput = createSelector(

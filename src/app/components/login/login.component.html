@@ -1,10 +1,36 @@
-<div>
-    <p class="error" *ngIf="errorMessage$ | async">{{ errorMessage$ | async }}</p>
-    <label for="username" >Username: </label>
-    <input id="username" placeholder="Username" [(ngModel)]="username">
-    <label for="password">Password: </label>
-    <input id="password" type="password" placeholder="Password" [(ngModel)]="password">
-    <button (click)="logIn()">Log In</button>
-    <p>Need to sign up?</p>
-    <a routerLink='/signup'>Go to Sign Up</a>
-</div>
+<mat-card id='log-in-form-card'>
+    <mat-card-title>Log In</mat-card-title>
+    <form id='form' [formGroup]='userForm' (ngSubmit)="logIn()">
+        <mat-form-field class="input" appearance="outline">
+            <mat-label>Username</mat-label>
+            <input
+                matInput
+                required
+                placeholder="Username"
+                formControlName='username'
+            >
+            <mat-error *ngIf="userForm.invalid">{{ getUsernameErrorMessage() }}</mat-error>
+        </mat-form-field>
+        <mat-form-field class="input" appearance="outline">
+            <mat-label>Password</mat-label>
+            <input
+                matInput
+                required
+                type="password"
+                placeholder="Password" 
+                formControlName='password'
+            >
+            <mat-error *ngIf="userForm.invalid">{{ getPasswordErrorMessage() }}</mat-error>
+        </mat-form-field>
+        <button mat-raised-button color='primary' type="submit" [disabled]="!userForm.valid">
+            <mat-icon color='accent'>login</mat-icon>
+            Log In
+        </button>
+    </form>
+    <mat-divider inset></mat-divider>
+    <mat-card-content id='content' >Don't have an account?</mat-card-content>
+    <a mat-raised-button routerLink='/signup'>
+        <mat-icon color='primary'>undo</mat-icon>
+        Sign Up Instead
+    </a>
+</mat-card>

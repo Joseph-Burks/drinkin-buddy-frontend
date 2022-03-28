@@ -27,16 +27,10 @@ export class UserEffects {
             .pipe(
                 map(response => this.succesfullLogIn(response)),
                 catchError(response => {
-                    console.log(response)
-                    let usernameError = ''
-                    let passwordError = ''
-                    if(response.error.username){
-                        usernameError = `Username ${response.error.username[0]}`
-                    }
-                    if(response.error.password){
-                        passwordError = `Password ${response.error.password[0]}`
-                    }
-                    return of(signUpUserFail({usernameError, passwordError}))
+                    
+                    let errorMessage = `Username ${response.error.username[0]}`
+                    alert(errorMessage)
+                    return of(signUpUserFail({errorMessage}))
                 })
             )
         )
@@ -47,7 +41,7 @@ export class UserEffects {
         mergeMap((action) => this.userService.logIn({ user: {username: action.usernameInput, password: action.passwordInput }})
             .pipe(
                 map(response => this.succesfullLogIn(response)),
-                catchError(response => of(userLoadedFail({ error: response.error })))
+                catchError(response => of(userLoadedFail({ errorMessage: response.error })))
             )
         )
     ));
@@ -57,7 +51,7 @@ export class UserEffects {
         mergeMap(() => this.userService.getUser()
             .pipe(
                 map(user => userLoadedSuccess(user)),
-                catchError(response => of(userLoadedFail({ error: response.error })))
+                catchError(response => of(userLoadedFail({ errorMessage: response.error })))
             )
         )
     ));
