@@ -67,11 +67,11 @@ const initialState: AppState = {
 export const appReducer = createReducer<AppState>(
     initialState,
     on(userActions.signUpUser, (state, props) => ({...state, usernameIput: props.usernameInput, passwordInput: props.passwordInput, userLoading: true})),
-    on(userActions.signUpUserFail, (state, props) => ({...state, usernameError: props.errorMessage, userLoading: false})),
+    on(userActions.signUpUserFail, (state, props) => ({...state, errorMessage: props.errorMessage, userLoading: false})),
     on(userActions.loadUserWithToken, (state, props) => ({...state, userLoading: true})),
     on(userActions.logInUser, (state, props) => ({...state, usernameIput: props.usernameInput, passwordInput: props.passwordInput, userLoading: true})),
     on(userActions.userLoadedFail, (state, props) => ({...state, errorMessage: props.errorMessage, userLoading: false})),
-    on(userActions.userLoadedSuccess, (state, User) => ({...state, user: User, userLoading: false, userLoaded: true, usernameError: '', passwordError: '', errorMessage: ''})),
+    on(userActions.userLoadedSuccess, (state, User) => ({...state, user: User, userLoading: false, userLoaded: true, errorMessage: ''})),
     on(userActions.logOutUser, () => initialState),
 
     on(breweryActions.loadBreweries, (state) => ({...state, breweriesLoading: true})),
@@ -144,6 +144,26 @@ export const usernameInput = createSelector(
 export const userLoaded = createSelector(
     appFeatureSelector,
     (appState) => appState.userLoaded
+)
+
+export const userReviews = createSelector(
+    appFeatureSelector,
+    (appState) => {
+        if(appState.user){
+            return appState.user.reviews
+        }
+        return null
+    }
+)
+
+export const userInterests = createSelector(
+    appFeatureSelector,
+    (appState) => {
+        if(appState.user){
+            return appState.user.interests
+        }
+        return null
+    }
 )
             
 // Breweries

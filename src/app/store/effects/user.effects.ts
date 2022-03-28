@@ -65,6 +65,7 @@ export class UserEffects {
     ) {}
 
     succesfullLogIn(response: SuccessfulUserResponse) {
+        console.log(response)
         localStorage['token'] = response.token
         this.router.navigate(['/dashboard'])
         return userLoadedSuccess(response.user)

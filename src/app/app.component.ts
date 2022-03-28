@@ -18,11 +18,13 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     if(localStorage['token']){
       this.getUser()
+    } else {
+      this.router.navigate(['/'])
     }
   }
 
   getUser(): void {
     this._store.dispatch(loadUserWithToken())
-    this.router.navigate(['/breweries'])
+    this.router.navigate(['/dashboard'])
   }
 }
