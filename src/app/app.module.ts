@@ -43,6 +43,7 @@ import { ReviewEffects } from './store/effects/review.effects';
 import { AddBeerComponent } from './components/beer/add-beer/add-beer.component';
 import { AddReviewComponent } from './components/review/add-review/add-review.component';
 import { InterestsComponent } from './components/interests/interests.component';
+import { MyReviewsComponent } from './components/review/my-reviews/my-reviews.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { InterestsComponent } from './components/interests/interests.component';
     AddBeerComponent,
     AddReviewComponent,
     InterestsComponent,
+    MyReviewsComponent,
   ],
   imports: [
     BrowserModule,

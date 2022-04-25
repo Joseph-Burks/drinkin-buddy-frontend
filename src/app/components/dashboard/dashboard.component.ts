@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { User } from '../../models/user'
+import { UserReview } from './../../models/review';
 import { username, userReviews, userInterests } from '../../store/app.store';
 
 
@@ -31,6 +32,10 @@ export class DashboardComponent implements OnInit {
 
   goToInterests(): void {
     this.router.navigate(['/interests'])
+  }
+
+  goToReviews(): void {
+    this.router.navigate(['/my-reviews'])
   }
 
 }
