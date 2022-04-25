@@ -1,0 +1,11 @@
+<mat-card class='list'>
+    <mat-card-title>Beers of Interest</mat-card-title>
+    <mat-action-list>
+      <button mat-list-item *ngFor="let beer of userInterests$ | async" (click)='goToBeer(beer.id)'>
+          <div>
+            <div mat-line>{{beer.name}}</div>
+            <div mat-line class='brewery'>{{beer.brewery}}</div>
+        </div>
+      </button>
+    </mat-action-list>
+</mat-card>

@@ -1,0 +1,19 @@
+.list {
+    
+    margin: 2%;
+  }
+
+.brewery {
+    font-style: italic;
+    font-size: .5em;
+    color: #673ab7
+}
+
+.list-item {
+    background-color: lavender;
+}
+
+.card {
+    max-width: 90%;
+    max-height: 70%
+}

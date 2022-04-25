@@ -29,4 +29,8 @@ export class DashboardComponent implements OnInit {
     this.router.navigate([`beer/${id}`])
   }
 
+  goToInterests(): void {
+    this.router.navigate(['/interests'])
+  }
+
 }

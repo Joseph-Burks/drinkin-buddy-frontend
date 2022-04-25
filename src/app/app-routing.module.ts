@@ -11,6 +11,7 @@ import { BreweryDetailsComponent } from './components/brewery/brewery-details/br
 import { BeersComponent } from './components/beer/beers/beers.component';
 import { AddBeerComponent } from './components/beer/add-beer/add-beer.component';
 import { BeerDetailsComponent } from './components/beer/beer-details/beer-details.component';
+import { InterestsComponent } from './components/interests/interests.component'
 
 const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'beers', component: BeersComponent },
   { path: 'new-beer', component: AddBeerComponent },
   { path: 'beer/:id', component: BeerDetailsComponent},
+  { path: 'interests', component: InterestsComponent},
   { path: '**', component: LandingComponent}
 ];
 
