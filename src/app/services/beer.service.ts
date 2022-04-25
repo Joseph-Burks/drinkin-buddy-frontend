@@ -6,6 +6,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { baseUrl } from '../baseUrl';
 import { Beer, BeerDetails, NewBeer } from '../models/beer'
 import { Interest } from '../models/interest';
+import { User } from '../models/user';
 
 
 @Injectable({
@@ -37,8 +38,12 @@ export class BeerService {
     return this.http.post<BeerDetails>(this.beersUrl, { beer }, this.authOptions)
   }
 
-  addInterest(id: number): Observable<Interest> {
-    return this.http.post<Interest>(this.interestsUrl, { interest: { beer_id: id } }, this.authOptions)
+  addInterest(id: number): Observable<User> {
+    return this.http.post<User>(this.interestsUrl, { interest: { beer_id: id } }, this.authOptions)
+  }
+
+  deleteInterest(id: number): Observable<User> {
+    return this.http.post<User>(this.interestsUrl + 'remove', { interest: { beer_id: id } }, this.authOptions)
   }
 
   // updateBeer(beer: Beer): Observable<any> {

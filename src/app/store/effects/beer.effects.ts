@@ -20,6 +20,9 @@ import {
     addBeerToInterests,
     addInterestSuccess,
     addInterestFail,
+    deleteInterest,
+    deleteInterestSuccess,
+    deleteInterestFail,
 } from '../actions/beer.actions';
 
  
@@ -76,14 +79,34 @@ export class BeerEffects {
         ofType(addBeerToInterests),
         mergeMap((action) => this.beerService.addInterest(action.beerId)
             .pipe(
-                map(interest => {
+                map(user => {
                     alert('Interst added successfully.')
-                    return addInterestSuccess()
+                    console.log(user)
+                    return addInterestSuccess(user)
                 }),
                 catchError(response => {
                     console.log(response)
                     alert(response.error)
                     return of(addInterestFail())
+                }
+            )
+        )
+    ))})
+
+    deleteInterest$ = createEffect(() => {
+        return this.actions$.pipe(
+        ofType(deleteInterest),
+        mergeMap((action) => this.beerService.deleteInterest(action.beerId)
+            .pipe(
+                map(user => {
+                    alert('Interst removed successfully.')
+                    console.log(user)
+                    return deleteInterestSuccess(user)
+                }),
+                catchError(response => {
+                    console.log(response)
+                    alert(response.error)
+                    return of(deleteInterestFail())
                 }
             )
         )

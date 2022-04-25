@@ -1,6 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 
 import { Beer, BeerDetails, NewBeer } from '../../models/beer'
+import { User } from '../../models/user'
 
 export const loadBeers = createAction('[Beers Component] Load All Beers')
 export const loadBeersFail = createAction('[Beers API] Beers Loaded Fail')
@@ -16,5 +17,8 @@ export const loadBeerFail = createAction('[Beers API] Load Beer Fail', props<{er
 export const loadBeerSuccess = createAction('[Beers API] Load Beer Success', props<BeerDetails>())
 
 export const addBeerToInterests = createAction('[Beer Details Component] Add to Interests', props<{beerId: number}>())
-export const addInterestSuccess = createAction('[Interests API] Add Interest Success')
+export const addInterestSuccess = createAction('[Interests API] Add Interest Success', props<User>())
 export const addInterestFail = createAction('[Interests API] Add Interest Fail')
+export const deleteInterest = createAction('[Beer Details Component] Delete Interest', props<{beerId: number}>())
+export const deleteInterestSuccess = createAction('[Interests API] Delete Interest Success', props<User>())
+export const deleteInterestFail = createAction('[Interests API] Delete Interest Fail')

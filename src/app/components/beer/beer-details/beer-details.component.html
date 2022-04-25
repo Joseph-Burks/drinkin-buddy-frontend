@@ -1,6 +1,12 @@
 <h2 *ngIf='beerLoading$ | async'>Loading...</h2>
 <div *ngIf='beerLoaded$ | async'>
-    <h1>{{ beerName$ | async }}</h1><button mat-raised-button color='primary' (click)="addToInterests()"><mat-icon>playlist_add</mat-icon></button>
+    <h1>{{ beerName$ | async }}</h1>
+    <div  *ngIf='interested$ | async; else notInterested'>
+        <button mat-raised-button color='accent' (click)="removeInterest()"><mat-icon>playlist_remove</mat-icon> Remove from Interest</button>
+    </div>
+    <ng-template #notInterested>
+        <button mat-raised-button color='primary' (click)="addToInterests()"><mat-icon>playlist_add</mat-icon> Add to Interested</button>
+    </ng-template>
     <h3 *ngIf='beerBreweryName$ | async' >Brewery: {{ beerBreweryName$ | async }}</h3>
     <h3 *ngIf='beerStyleName$ | async' >Style: {{ beerStyleName$ | async }}</h3>
     <h3 *ngIf='beerABV$ | async' >Alcohol Content: {{ beerABV$ | async }}% ABV</h3>

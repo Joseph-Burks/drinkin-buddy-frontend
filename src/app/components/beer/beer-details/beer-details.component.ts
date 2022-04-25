@@ -7,7 +7,7 @@ import { MatDialog } from '@angular/material/dialog'
 import { BeerDetails } from '../../../models/beer';
 import { AddReviewComponent } from '../../review/add-review/add-review.component';
 
-import { loadBeer, addBeerToInterests } from '../../../store/actions/beer.actions'
+import { loadBeer, addBeerToInterests, deleteInterest } from '../../../store/actions/beer.actions'
 import {
   beer,
   beerLoading,
@@ -17,7 +17,8 @@ import {
   beerStyleName,
   beerABV,
   beerIBU,
-  beerAverageRating
+  beerAverageRating,
+  interested
 } from '../../../store/app.store'
 
 @Component({
@@ -35,6 +36,7 @@ export class BeerDetailsComponent implements OnInit {
   beerABV$: Observable<number | null> = this._store.select(beerABV)
   beerIBU$: Observable<number | null> = this._store.select(beerIBU)
   beerAverageRating$: Observable<number | null> = this._store.select(beerAverageRating)
+  interested$: Observable<boolean> = this._store.select(interested)
 
   constructor(
     private route: ActivatedRoute,
@@ -53,8 +55,12 @@ export class BeerDetailsComponent implements OnInit {
 
   addToInterests(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    console.log('add interest', id)
     this._store.dispatch(addBeerToInterests({beerId: id}))
+  }
+
+  removeInterest(): void {
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    this._store.dispatch(deleteInterest({beerId: id}))
   }
 
   toggleAddReview(): void {

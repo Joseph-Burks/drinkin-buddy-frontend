@@ -93,6 +93,8 @@ export const appReducer = createReducer<AppState>(
     on(beerActions.loadBeer, (state) => ({...state, beerLoading: true, beerLoaded: false})),
     on(beerActions.loadBeerFail, (state, props) => ({...state, beerLoading: false, errorMessage: props.errorMessage})),
     on(beerActions.loadBeerSuccess, (state, Beer) => ({...state, beerLoading: false, beerLoaded: true, beer: Beer})),
+    on(beerActions.addInterestSuccess, (state, User) => ({...state, user: User})),
+    on(beerActions.deleteInterestSuccess, (state, User) => ({...state, user: User}))
 
 )
 
@@ -163,6 +165,18 @@ export const userInterests = createSelector(
             return appState.user.interests
         }
         return null
+    }
+)
+
+export const interested = createSelector(
+    appFeatureSelector,
+    (appState) => {
+        if(appState.user){
+            let ids: number[] = []
+            appState.user.interests.forEach(int => ids.push(int.id))
+            return appState.beer ? ids.includes(appState.beer.id) : false
+        }
+        return false
     }
 )
             
