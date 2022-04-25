@@ -4,7 +4,7 @@ import { Review } from './review'
 export interface Beer {
     id: number;
     name: string;
-    brewery_id: number;
+    brewery: Brewery;
     style: string;
     description: string;
     alcohol_content: number;

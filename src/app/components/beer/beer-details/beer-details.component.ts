@@ -7,7 +7,7 @@ import { MatDialog } from '@angular/material/dialog'
 import { BeerDetails } from '../../../models/beer';
 import { AddReviewComponent } from '../../review/add-review/add-review.component';
 
-import { loadBeer } from '../../../store/actions/beer.actions'
+import { loadBeer, addBeerToInterests } from '../../../store/actions/beer.actions'
 import {
   beer,
   beerLoading,
@@ -49,6 +49,12 @@ export class BeerDetailsComponent implements OnInit {
   getBeer(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this._store.dispatch(loadBeer({id}))
+  }
+
+  addToInterests(): void {
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    console.log('add interest', id)
+    this._store.dispatch(addBeerToInterests({beerId: id}))
   }
 
   toggleAddReview(): void {

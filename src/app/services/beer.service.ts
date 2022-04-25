@@ -5,6 +5,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 import { baseUrl } from '../baseUrl';
 import { Beer, BeerDetails, NewBeer } from '../models/beer'
+import { Interest } from '../models/interest';
 
 
 @Injectable({
@@ -12,6 +13,7 @@ import { Beer, BeerDetails, NewBeer } from '../models/beer'
 })
 export class BeerService {
   private beersUrl = `${baseUrl}/beers/`
+  private interestsUrl = `${baseUrl}/interests/`
 
   authOptions = {
     headers: new HttpHeaders({
@@ -33,6 +35,10 @@ export class BeerService {
   addBeer(beer: NewBeer): Observable<BeerDetails> {
     console.log(beer)
     return this.http.post<BeerDetails>(this.beersUrl, { beer }, this.authOptions)
+  }
+
+  addInterest(id: number): Observable<Interest> {
+    return this.http.post<Interest>(this.interestsUrl, { interest: { beer_id: id } }, this.authOptions)
   }
 
   // updateBeer(beer: Beer): Observable<any> {

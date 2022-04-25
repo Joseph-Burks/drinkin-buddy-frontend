@@ -19,6 +19,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatListModule } from '@angular/material/list';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
@@ -82,6 +83,7 @@ import { AddReviewComponent } from './components/review/add-review/add-review.co
     MatDividerModule,
     MatFormFieldModule,
     MatGridListModule,
+    MatListModule,
     FormsModule,
     ReactiveFormsModule,
   ],

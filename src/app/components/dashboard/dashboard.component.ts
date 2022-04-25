@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
@@ -17,10 +18,15 @@ export class DashboardComponent implements OnInit {
   userInterests$ = this._store.select(userInterests)
 
   constructor(
-    private _store: Store
+    private _store: Store,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
+  }
+
+  goToBeer(id: number): void {
+    this.router.navigate([`beer/${id}`])
   }
 
 }

@@ -2,12 +2,19 @@
   <mat-card-title>{{ username$ | async }}</mat-card-title>
 </mat-card>
 
-<mat-divider inset></mat-divider>
+<mat-divider></mat-divider>
 
 <div id='lists'>
 
   <mat-card class='list'>
     <mat-card-title>Beers of Interests</mat-card-title>
+    <mat-action-list>
+      <button mat-list-item *ngFor="let beer of userInterests$ | async | slice:0:5; let i=index" (click)='goToBeer(beer.id)'>
+        <div mat-line>{{beer.name}}</div>
+        <div mat-line class='brewery'>{{beer.brewery}}</div>
+      </button>
+    </mat-action-list>
+    <button mat-raised-button color='primary'>View All</button>
   </mat-card>
   
   <mat-card class='list' >
@@ -15,3 +22,19 @@
   </mat-card>
   
 </div>
+
+
+<!-- <mat-list>
+  <mat-list-item *ngFor="let folder of folders">
+    <mat-icon mat-list-icon>folder</mat-icon>
+    <div mat-line>{{folder.name}}</div>
+    <div mat-line> {{folder.updated | date}} </div>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  <div mat-subheader>Notes</div>
+  <mat-list-item *ngFor="let note of notes">
+    <mat-icon mat-list-icon>note</mat-icon>
+    <div mat-line>{{note.name}}</div>
+    <div mat-line> {{note.updated | date}} </div>
+  </mat-list-item>
+</mat-list> -->

@@ -1,9 +1,9 @@
 import { Review } from "./review";
-import { Beer } from "./beer";
+import { InterestedBeer } from "./interest";
 
 export interface User {
     id: number;
     username: string;
     reviews: Review[];
-    interests: Beer[]
+    interests: InterestedBeer[]
 }

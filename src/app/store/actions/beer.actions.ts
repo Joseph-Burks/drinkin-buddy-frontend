@@ -14,3 +14,7 @@ export const addBeerSuccess = createAction('[Beers API] Add Beer Success', props
 export const loadBeer = createAction('[Beer Details Component] Load Beer', props<{id: number}>())
 export const loadBeerFail = createAction('[Beers API] Load Beer Fail', props<{errorMessage: string}>())
 export const loadBeerSuccess = createAction('[Beers API] Load Beer Success', props<BeerDetails>())
+
+export const addBeerToInterests = createAction('[Beer Details Component] Add to Interests', props<{beerId: number}>())
+export const addInterestSuccess = createAction('[Interests API] Add Interest Success')
+export const addInterestFail = createAction('[Interests API] Add Interest Fail')
