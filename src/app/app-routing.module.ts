@@ -5,6 +5,7 @@ import { LandingComponent } from './components/landing/landing.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { ReviewComponent } from './components/review/review/review.component';
 import { BreweriesComponent } from './components/brewery/breweries/breweries.component';
 import { AddBreweryComponent } from './components/brewery/add-brewery/add-brewery.component';
 import { BreweryDetailsComponent } from './components/brewery/brewery-details/brewery-details.component';
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent },
+  { path: 'reviews', component: ReviewComponent},
   { path: 'breweries', component: BreweriesComponent },
   { path: 'new-brewery', component: AddBreweryComponent },
   { path: 'brewery/:id', component: BreweryDetailsComponent},
