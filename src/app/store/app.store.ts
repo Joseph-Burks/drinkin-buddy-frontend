@@ -3,6 +3,7 @@ import { createReducer, createSelector, createFeatureSelector, on, props } from 
 import * as userActions from './actions/user.actions'
 import * as breweryActions from './actions/brewery.actions'
 import * as beerActions from './actions/beer.actions'
+import * as reviewActions from './actions/review.actions'
 
 import { User } from '../models/user';
 import { Brewery, BreweryDetails } from '../models/brewery';
@@ -94,7 +95,9 @@ export const appReducer = createReducer<AppState>(
     on(beerActions.loadBeerFail, (state, props) => ({...state, beerLoading: false, errorMessage: props.errorMessage})),
     on(beerActions.loadBeerSuccess, (state, Beer) => ({...state, beerLoading: false, beerLoaded: true, beer: Beer})),
     on(beerActions.addInterestSuccess, (state, User) => ({...state, user: User})),
-    on(beerActions.deleteInterestSuccess, (state, User) => ({...state, user: User}))
+    on(beerActions.deleteInterestSuccess, (state, User) => ({...state, user: User})),
+
+    on(reviewActions.addReviewSuccess, (state, User) => ({...state, user: User}))
 
 )
 

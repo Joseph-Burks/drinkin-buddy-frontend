@@ -22,9 +22,9 @@ export class ReviewEffects {
         ofType(addReview),
         mergeMap((action) => this.reviewService.addNew(action)
             .pipe(
-                map(review => {
-                    //this.router.navigate([`/brewery/${brewery.id}`])
-                    return addReviewSuccess(review)
+                map(user => {
+                    this.router.navigate(['/my-reviews'])
+                    return addReviewSuccess(user)
                 }),
                 catchError(response => {
                     console.log(response)

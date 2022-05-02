@@ -3,12 +3,12 @@
     <div>
         <mat-form-field id='beer-input' appearance="fill">
             <mat-label>Select a Beer</mat-label>
-            <input matInput
-                  #filterInput
-                   [matAutocomplete]="auto"
-                   (input)="filter(filterInput.value)">
-            <mat-autocomplete #auto="matAutocomplete">
-              <mat-option *ngFor="let beer of beers$ | async" [value]="beer.name">
+              <input matInput
+                    #filterInput
+                    [matAutocomplete]="auto"
+                    (input)="filter(filterInput.value)">
+            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onBeerSelected($event)">
+              <mat-option *ngFor="let beer of beers$ | async"  [value]="beer.name" [id]="beer.id.toString()">
                 <!-- <img class="" aria-hidden [src]="beer.img" height="25">  -->
                 <span>{{beer.name}}</span> | 
                 <small class='brewery-name'>{{beer.brewery.name}}</small>
@@ -34,7 +34,7 @@
 
         <br>
 
-        <button mat-raised-button color='primary'>Submit Review</button>
+        <button mat-raised-button color='primary' (click)='submitReview()'>Submit Review</button>
     </div>
 
 </mat-card>

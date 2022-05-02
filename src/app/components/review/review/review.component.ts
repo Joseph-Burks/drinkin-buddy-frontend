@@ -5,7 +5,8 @@ import { Observable } from 'rxjs';
 
 import { Beer } from '../../../models/beer'
 import { loadBeers, filterBeers } from '../../../store/actions/beer.actions'
-import { beers } from '../../../store/app.store'
+import { addReview } from '../../../store/actions/review.actions'
+import { beers, userId } from '../../../store/app.store'
 
 @Component({
   selector: 'app-review',
@@ -14,7 +15,9 @@ import { beers } from '../../../store/app.store'
 })
 export class ReviewComponent implements OnInit {
 
+  userId$: Observable<number | null> = this._store.select(userId)
   beers$: Observable<Beer[]> = this._store.select(beers)
+  beerId: number | null = null
   rating: number = 0
   note: string = ''
   starCount = 0
@@ -34,6 +37,10 @@ export class ReviewComponent implements OnInit {
     this._store.dispatch(loadBeers())
   }
 
+  onBeerSelected(event: any): void {
+    this.beerId = event.option.id
+  }
+
   onClick(rating:number) {
     this.rating = rating
   }
@@ -48,6 +55,22 @@ export class ReviewComponent implements OnInit {
 
   filter(term: string): void {
     this._store.dispatch(filterBeers({filter: term.toLowerCase()}))
+  }
+
+  submitReview(): void {
+
+    this.userId$.subscribe( userId => {
+
+      let newReview = {
+          user_id: userId,
+          beer_id: this.beerId,
+          rating: this.rating,
+          note: this.note,
+      }
+      console.log(newReview)
+      this._store.dispatch(addReview(newReview))
+    })
+    
   }
 
 }

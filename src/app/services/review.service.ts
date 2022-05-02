@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { baseUrl } from '../baseUrl';
 import { Review, NewReview } from './../models/review';
+import { User } from './../models/user'
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,7 @@ export class ReviewService {
     return this.http.get<Review[]>(this.reviewsUrl, this.authOptions)
   }
 
-  addNew(newReview: NewReview): Observable<Review> {
-    return this.http.post<Review>(this.reviewsUrl, {review: newReview}, this.authOptions )
+  addNew(newReview: NewReview): Observable<User> {
+    return this.http.post<User>(this.reviewsUrl, {review: newReview}, this.authOptions )
   }
 }
