@@ -20,7 +20,7 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'reviews', component: ReviewComponent},
+  { path: 'review', component: ReviewComponent},
   { path: 'breweries', component: BreweriesComponent },
   { path: 'new-brewery', component: AddBreweryComponent },
   { path: 'brewery/:id', component: BreweryDetailsComponent},
@@ -29,7 +29,7 @@ const routes: Routes = [
   { path: 'beer/:id', component: BeerDetailsComponent},
   { path: 'interests', component: InterestsComponent},
   { path: 'my-reviews', component: MyReviewsComponent},
-  { path: '**', component: LandingComponent}
+  { path: '**', component: DashboardComponent}
 ];
 
 @NgModule({

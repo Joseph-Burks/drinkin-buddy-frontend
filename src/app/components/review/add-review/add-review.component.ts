@@ -36,7 +36,6 @@ export class AddReviewComponent implements OnInit {
   }
 
   onClick(rating:number) {
-    console.log(rating)
     this.rating = rating
   }
 

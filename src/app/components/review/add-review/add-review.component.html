@@ -7,13 +7,9 @@
           {{showIcon(i)}}
         </mat-icon>
       </button>
-      <!-- <mat-error *ngIf="rating == 0">
-        Rating <strong>required</strong> and cannot be zero
-      </mat-error> -->
-      <p class="body-2">
-          Your rated <span class="body-2">{{rating}}</span> / <span class="body-2">5</span>
+      <p>
+          Your rated <span>{{rating}}</span> / <span>5</span>
       </p>
-    <!-- </mat-form-field> -->
     <mat-form-field appearance="outline" [color]="colorControl">
       <mat-label>Note</mat-label>
       <textarea matInput [(ngModel)]="note"></textarea>

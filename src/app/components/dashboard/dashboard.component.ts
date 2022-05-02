@@ -6,6 +6,8 @@ import { Observable } from 'rxjs';
 import { User } from '../../models/user'
 import { UserReview } from './../../models/review';
 import { username, userReviews, userInterests } from '../../store/app.store';
+import { loadBeers } from '../../store/actions/beer.actions'
+import { getLocaleNumberSymbol } from '@angular/common';
 
 
 @Component({
@@ -24,6 +26,11 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.getBeers()
+  }
+
+  getBeers(): void {
+    this._store.dispatch(loadBeers())
   }
 
   goToBeer(id: number): void {
