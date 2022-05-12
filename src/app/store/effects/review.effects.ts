@@ -28,6 +28,7 @@ export class ReviewEffects {
                 }),
                 catchError(response => {
                     console.log(response)
+                    alert(response.error.user)
                     return of(addReviewFail({ errorMessage: response.error.user }))
                 })
             )

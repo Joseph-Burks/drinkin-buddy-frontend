@@ -33,7 +33,6 @@ export class ReviewComponent implements OnInit {
   }
 
   getBeers(): void {
-    console.log('getting beers')
     this._store.dispatch(loadBeers())
   }
 
@@ -67,7 +66,6 @@ export class ReviewComponent implements OnInit {
           rating: this.rating,
           note: this.note,
       }
-      console.log(newReview)
       this._store.dispatch(addReview(newReview))
     })
     

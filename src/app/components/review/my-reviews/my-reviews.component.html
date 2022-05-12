@@ -1,7 +1,7 @@
 <mat-card class='list' >
     <mat-card-title>Reviewed Beers</mat-card-title>
     <mat-action-list>
-      <button mat-list-item *ngFor="let review of userReviews$ | async | slice:-5; let i=index" (click)='goToBeer(review.beer.id)'>
+      <button mat-list-item *ngFor="let review of userReviews$ | async" (click)='goToBeer(review.beer.id)'>
         <div mat-line>{{review.beer.name}}</div>
         <div mat-line class='brewery'>Rating: {{review.rating}}</div>
       </button>

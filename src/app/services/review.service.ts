@@ -25,6 +25,12 @@ export class ReviewService {
   }
 
   addNew(newReview: NewReview): Observable<User> {
-    return this.http.post<User>(this.reviewsUrl, {review: newReview}, this.authOptions )
+    const review = {
+      user_id: newReview.user_id,
+      beer_id: newReview.beer_id,
+      rating: newReview.rating,
+      note: newReview.note,
+    }
+    return this.http.post<User>(this.reviewsUrl, {review}, this.authOptions )
   }
 }
