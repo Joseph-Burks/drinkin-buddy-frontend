@@ -46,9 +46,18 @@ export class BreweriesComponent implements OnInit {
     this.router.navigate(['/new-brewery'])
   }
 
+  sortList(): void {
+    console.log('sort clicked')
+  }
+
+  filterList(): void {
+    console.log('filter clicked')
+  }
+
   goToBrewery(id: number): void {
     
     this.router.navigate([`/brewery/${id}`])
   }
+
 
 }

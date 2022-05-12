@@ -37,6 +37,18 @@ export class BeersComponent implements OnInit {
     this._store.dispatch(filterBeers({filter: term.toLowerCase()}))
   }
 
+  goToAddBeer(): void {
+    this.router.navigate(['/new-brewery'])
+  }
+
+  sortList(): void {
+    console.log('sort clicked')
+  }
+
+  filterList(): void {
+    console.log('filter clicked')
+  }
+
   goToBeer(id: number): void {
     this.router.navigate([`beer/${id}`])
   }

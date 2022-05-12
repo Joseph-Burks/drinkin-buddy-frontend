@@ -4,15 +4,18 @@
   
 <mat-divider></mat-divider>
 
-<div id=''>
+<div id='search-sort-filter'>
 
-    <mat-form-field class="input" appearance="outline">
+    <mat-form-field id="input" appearance="outline">
         <mat-label>Brewery Search</mat-label>
         <input matInput #filterInput id="filter" (input)="filter(filterInput.value)" />
     </mat-form-field>
 
-
-    <button (click)='goToAddBrewery()'>Add a Brewery</button>
+    <div id='buttons'>
+        <button mat-icon-button (click)='sortList()'><mat-icon color='primary'>sort_by_alpha</mat-icon></button>
+        <button mat-icon-button (click)='filterList()'><mat-icon color='primary'>filter_list</mat-icon></button>
+        <button mat-icon-button (click)='goToAddBrewery()'><mat-icon color='primary'>add_circle_outline</mat-icon></button>
+    </div>
 
 </div>
 

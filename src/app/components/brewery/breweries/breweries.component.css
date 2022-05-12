@@ -8,6 +8,19 @@
     background-color: rgba(103,58,183,.15);
 }
 
+#search-sort-filter {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: auto;
+    padding-top: 1.3rem;
+}
+
+#buttons{
+    padding-bottom: 1.3rem;
+}
+
 @media (max-width: 830px) {
     #title {
         width: 80%;

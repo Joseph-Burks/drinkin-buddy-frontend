@@ -1,9 +1,27 @@
-<h1 *ngIf='beersLoading$ | async'>Loading...</h1>
-<div id="search-component">
-  <label for="filter">Beer Search</label>
-  <input #filterInput id="filter" (input)="filter(filterInput.value)" />
+<mat-card id='title'>
+  <mat-card-title>Beers</mat-card-title>
+</mat-card>
+
+<mat-divider></mat-divider>
+
+<div id='search-sort-filter'>
+  
+  <mat-form-field id="input" appearance="outline">
+    <mat-label>Beer Search</mat-label>
+    <input matInput #filterInput id="filter" (input)="filter(filterInput.value)" />
+  </mat-form-field>
+  
+  <div id='buttons'>
+    <button mat-icon-button (click)='sortList()'><mat-icon color='primary'>sort_by_alpha</mat-icon></button>
+    <button mat-icon-button (click)='filterList()'><mat-icon color='primary'>filter_list</mat-icon></button>
+    <button mat-icon-button (click)='goToAddBeer()'><mat-icon color='primary'>add_circle_outline</mat-icon></button>
+  </div>
+  
 </div>
 
+<mat-divider></mat-divider>
+
+<h1 *ngIf='beersLoading$ | async'>Loading...</h1>
 
 <ul class='beers'>
 
