@@ -1,13 +1,22 @@
-<h1 id='title'>Breweries</h1>
+<mat-card id='title'>
+    <mat-card-title>Breweries</mat-card-title>
+</mat-card>
+  
+<mat-divider></mat-divider>
 
-<mat-divider inset></mat-divider>
+<div id=''>
 
-<div id="search-component">
-    <label for="filter">Brewery Search</label>
-    <input #filterInput id="filter" (input)="filter(filterInput.value)" />
+    <mat-form-field class="input" appearance="outline">
+        <mat-label>Brewery Search</mat-label>
+        <input matInput #filterInput id="filter" (input)="filter(filterInput.value)" />
+    </mat-form-field>
+
+
+    <button (click)='goToAddBrewery()'>Add a Brewery</button>
+
 </div>
 
-<button (click)='goToAddBrewery()'>Add a Brewery</button>
+<mat-divider></mat-divider>
 
 <h1 *ngIf='breweriesLoading$ | async'>Loading...</h1>
 
