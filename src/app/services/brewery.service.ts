@@ -22,7 +22,12 @@ export class BreweryService {
   constructor( private http: HttpClient ) { }
 
   getAll(): Observable<Brewery[]> {
+    console.log('loading all breweries')
     return this.http.get<Brewery[]>(this.breweriesUrl, this.authOptions)
+  }
+
+  getFirstTwenty(): Observable<Brewery[]> {
+    return this.http.get<Brewery[]>(`${baseUrl}/breweries-20`, this.authOptions)
   }
 
   addNew(newBrewery: NewBrewery): Observable<Brewery> {

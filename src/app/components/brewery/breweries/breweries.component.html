@@ -1,44 +1,56 @@
 <mat-card id='title'>
-    <mat-card-title>Breweries</mat-card-title>
+  <mat-card-title>Breweries</mat-card-title>
 </mat-card>
   
 <mat-divider></mat-divider>
 
 <div id='search-sort-filter'>
 
-    <mat-form-field id="input" appearance="outline">
-        <mat-label>Brewery Search</mat-label>
-        <input matInput #filterInput id="filter" (input)="filter(filterInput.value)" />
-    </mat-form-field>
+  <mat-form-field id="input" appearance="outline">
+    <mat-label>Brewery Search</mat-label>
+    <input matInput #filterInput id="filter" (input)="filter(filterInput.value)" />
+  </mat-form-field>
 
-    <div id='buttons'>
-        <button mat-icon-button disabled (click)='sortList()'><mat-icon>sort_by_alpha</mat-icon></button>
-        <button mat-icon-button disabled (click)='filterList()'><mat-icon>filter_list</mat-icon></button>
-        <button mat-icon-button color='primary' (click)='goToAddBrewery()'><mat-icon>add_circle_outline</mat-icon></button>
-    </div>
+  <div id='buttons'>
+    <button mat-icon-button disabled (click)='sortList()'><mat-icon>sort_by_alpha</mat-icon></button>
+    <button mat-icon-button disabled (click)='filterList()'><mat-icon>filter_list</mat-icon></button>
+    <button mat-icon-button color='primary' (click)='goToAddBrewery()'><mat-icon>add_circle_outline</mat-icon></button>
+  </div>
 
 </div>
 
 <mat-divider></mat-divider>
 
-<h1 *ngIf='breweriesLoading$ | async'>Loading...</h1>
+<mat-spinner id='spinner' *ngIf='breweriesLoading$ | async'></mat-spinner>
 
 <div id='list'>
-    <mat-action-list>
-      <button mat-list-item class='brewery' *ngFor="let brewery of breweries$ | async | slice:0:25; let i=index" (click)='goToBrewery(brewery.id)'>
-        <div mat-line>{{brewery.name}}  <span class='location'>{{brewery.city}}, {{brewery.state}}</span></div>
-      </button>
-    </mat-action-list>
-  </div>
+  <mat-action-list>
+    <button mat-list-item class='brewery' *ngFor="let brewery of breweries$ | async | slice:startIndex:startIndex + 20; let i=index" (click)='goToBrewery(brewery.id)'>
+      <div mat-line>{{brewery.name}}  <span class='location'>{{brewery.city}}, {{brewery.state}}</span></div>
+    </button>
+  </mat-action-list>
+</div>
 
-<!-- <ul class='breweries'>
+<mat-divider></mat-divider>
 
-    <li *ngFor="let brewery of breweries$ | async" (click)='goToBrewery(brewery.id)'>
-        
-            <span class='badge'>{{ brewery.id }}</span> {{ brewery.name }}
-        
-    </li>
+<div id='list-controls'>
 
-</ul> -->
+  <button mat-icon-button disabled='{{startIndex == 0}}' color="primary" (click)='first()'>
+    <mat-icon>first_page</mat-icon>
+  </button>
 
+  <button mat-icon-button disabled='{{startIndex == 0}}' color="primary" (click)='previous()'>
+    <mat-icon>navigate_before</mat-icon>
+  </button>
+
+  <div>{{breweriesLength() > 0 ? startIndex + 1 : 0}} - {{startIndex + 20 > breweriesLength() ? breweriesLength() : startIndex + 20 }} of {{breweriesLength()}}</div>
+
+  <button mat-icon-button disabled='{{startIndex + 20 >= breweriesLength()}}' color="primary" (click)='next()'>
+    <mat-icon>navigate_next</mat-icon>
+  </button>
+
+  <button mat-icon-button disabled='{{startIndex + 20 >= breweriesLength()}}' color="primary" (click)='last()'>
+    <mat-icon>last_page</mat-icon>
+  </button>
+</div>
 

@@ -10,7 +10,7 @@ import {
   breweries
 } from '../../../store/app.store';
 
-import { loadBreweries, filterBreweries } from '../../../store/actions/brewery.actions'
+import { loadTwentyBreweries, loadBreweries, filterBreweries } from '../../../store/actions/brewery.actions'
 
 @Component({
   selector: 'app-breweries',
@@ -20,18 +20,45 @@ import { loadBreweries, filterBreweries } from '../../../store/actions/brewery.a
 export class BreweriesComponent implements OnInit {
 
   breweries$: Observable<Brewery[]> = this._store.select(breweries)
-  breweriesLoading$ : Observable<boolean> = this._store.select(breweriesLoading)
-  breweriesLoaded$ : Observable<boolean> = this._store.select(breweriesLoaded)
+  breweriesLoading$: Observable<boolean> = this._store.select(breweriesLoading)
+  breweriesLoaded$: Observable<boolean> = this._store.select(breweriesLoaded)
+  startIndex: number = 0
   
   constructor( private router: Router, private _store: Store ) { }
 
   ngOnInit(): void {
-    this.getAllBreweries()
+    this.getBreweries()
     this._store.dispatch(filterBreweries({filter: ''}))
   }
 
-  getAllBreweries(): void {
+  getBreweries(): void {
+    this._store.dispatch(loadTwentyBreweries())
     this._store.dispatch(loadBreweries())
+  }
+
+  breweriesLength(): number {
+    let length = 0
+    this.breweries$.subscribe(breweries => length = breweries.length)
+    return length
+  }
+
+  next(): void {
+    this.startIndex += 20
+  }
+
+  last(): void {
+    let length = 0
+    this.breweries$.subscribe(breweries => length = breweries.length)
+    let remainder = length % 20
+    this.startIndex = length - remainder - 1
+  }
+
+  previous(): void {
+    this.startIndex -= 20
+  }
+
+  first(): void {
+    this.startIndex = 0
   }
 
   logBrewery(brewery: Brewery): void {
