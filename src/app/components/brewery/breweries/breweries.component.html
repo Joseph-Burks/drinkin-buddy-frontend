@@ -12,9 +12,9 @@
     </mat-form-field>
 
     <div id='buttons'>
-        <button mat-icon-button (click)='sortList()'><mat-icon color='primary'>sort_by_alpha</mat-icon></button>
-        <button mat-icon-button (click)='filterList()'><mat-icon color='primary'>filter_list</mat-icon></button>
-        <button mat-icon-button (click)='goToAddBrewery()'><mat-icon color='primary'>add_circle_outline</mat-icon></button>
+        <button mat-icon-button disabled (click)='sortList()'><mat-icon>sort_by_alpha</mat-icon></button>
+        <button mat-icon-button disabled (click)='filterList()'><mat-icon>filter_list</mat-icon></button>
+        <button mat-icon-button color='primary' (click)='goToAddBrewery()'><mat-icon>add_circle_outline</mat-icon></button>
     </div>
 
 </div>
@@ -23,7 +23,15 @@
 
 <h1 *ngIf='breweriesLoading$ | async'>Loading...</h1>
 
-<ul class='breweries'>
+<div id='list'>
+    <mat-action-list>
+      <button mat-list-item class='brewery' *ngFor="let brewery of breweries$ | async | slice:0:25; let i=index" (click)='goToBrewery(brewery.id)'>
+        <div mat-line>{{brewery.name}}  <span class='location'>{{brewery.city}}, {{brewery.state}}</span></div>
+      </button>
+    </mat-action-list>
+  </div>
+
+<!-- <ul class='breweries'>
 
     <li *ngFor="let brewery of breweries$ | async" (click)='goToBrewery(brewery.id)'>
         
@@ -31,6 +39,6 @@
         
     </li>
 
-</ul>
+</ul> -->
 
 

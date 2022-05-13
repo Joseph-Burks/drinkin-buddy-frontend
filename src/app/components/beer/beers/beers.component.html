@@ -23,10 +23,10 @@
 
 <h1 *ngIf='beersLoading$ | async'>Loading...</h1>
 
-<ul class='beers'>
-
-    <li *ngFor="let beer of beers$ | async" (click)='goToBeer(beer.id)'>
-        <span class='badge'>{{ beer.id }}</span> {{ beer.name }}
-    </li>
-
-</ul>
+<div id='list'>
+  <mat-action-list>
+    <button mat-list-item class='beer' *ngFor="let beer of beers$ | async | slice:0:25; let i=index" (click)='goToBeer(beer.id)'>
+      <div mat-line>{{beer.name}}  <span class='brewery'>{{beer.brewery.name}}</span></div>
+    </button>
+  </mat-action-list>
+</div>

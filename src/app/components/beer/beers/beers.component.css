@@ -21,8 +21,22 @@
   padding-bottom: 1.3rem;
 }
 
+#list {
+  margin-left: 5%;
+  flex-shrink: 0;
+}
+
+.brewery {
+  font-style: italic;
+  font-size: .75em;
+  color: #673ab7
+}
+
 @media (max-width: 830px) {
   #title {
       width: 80%;
+  }
+  #list {
+    margin-left: 1%;
   }
 }
