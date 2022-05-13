@@ -21,12 +21,36 @@
 
 <mat-divider></mat-divider>
 
-<h1 *ngIf='beersLoading$ | async'>Loading...</h1>
+<mat-spinner id='spinner' *ngIf='beersLoading$ | async'></mat-spinner>
 
 <div id='list'>
   <mat-action-list>
-    <button mat-list-item class='beer' *ngFor="let beer of beers$ | async | slice:0:25; let i=index" (click)='goToBeer(beer.id)'>
+    <button mat-list-item class='beer' *ngFor="let beer of beers$ | async | slice:startIndex:startIndex + 20; let i=index" (click)='goToBeer(beer.id)'>
       <div mat-line>{{beer.name}}  <span class='brewery'>{{beer.brewery.name}}</span></div>
     </button>
   </mat-action-list>
+</div>
+
+<mat-divider></mat-divider>
+
+<div id='list-controls'>
+
+  <button mat-icon-button disabled='{{startIndex == 0}}' color="primary" (click)='first()'>
+    <mat-icon>first_page</mat-icon>
+  </button>
+
+  <button mat-icon-button disabled='{{startIndex == 0}}' color="primary" (click)='previous()'>
+    <mat-icon>navigate_before</mat-icon>
+  </button>
+
+  <div>{{beersLength() > 0 ? startIndex + 1 : 0}} - {{startIndex + 20 > beersLength() ? beersLength() : startIndex + 20 }} of {{beersLength()}}</div>
+
+  <button mat-icon-button disabled='{{startIndex + 20 >= beersLength()}}' color="primary" (click)='next()'>
+    <mat-icon>navigate_next</mat-icon>
+  </button>
+
+  <button mat-icon-button disabled='{{startIndex + 20 >= beersLength()}}' color="primary" (click)='last()'>
+    <mat-icon>last_page</mat-icon>
+  </button>
+  
 </div>

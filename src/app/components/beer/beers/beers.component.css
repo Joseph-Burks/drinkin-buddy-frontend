@@ -32,6 +32,13 @@
   color: #673ab7
 }
 
+#list-controls {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: center;
+}
+
 @media (max-width: 830px) {
   #title {
       width: 80%;

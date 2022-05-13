@@ -25,8 +25,12 @@ export class BeerService {
 
   constructor( private http: HttpClient ) { }
 
-  getBeers(): Observable<Beer[]> {
+  getAll(): Observable<Beer[]> {
     return this.http.get<Beer[]>(this.beersUrl, this.authOptions)
+  }
+
+  getFirstTwenty(): Observable<Beer[]> {
+    return this.http.get<Beer[]>(`${baseUrl}/beers-20`, this.authOptions)
   }
 
   getBeer(id: number): Observable<BeerDetails> {

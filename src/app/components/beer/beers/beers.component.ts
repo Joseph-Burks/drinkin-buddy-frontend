@@ -11,7 +11,7 @@ import {
   beers,
   
 } from '../../../store/app.store';
-import { loadBeers, filterBeers } from '../../../store/actions/beer.actions'
+import { loadBeers, loadTwentyBeers, filterBeers } from '../../../store/actions/beer.actions'
 
 
 @Component({
@@ -22,6 +22,7 @@ import { loadBeers, filterBeers } from '../../../store/actions/beer.actions'
 export class BeersComponent implements OnInit {
   beers$: Observable<Beer[]> = this._store.select(beers)
   beersLoading$: Observable<boolean> = this._store.select(beersLoading)
+  startIndex: number = 0
 
   constructor( private router: Router, private _store: Store) { }
 
@@ -30,7 +31,33 @@ export class BeersComponent implements OnInit {
   }
 
   getBeers(): void {
+    this._store.dispatch(loadTwentyBeers())
     this._store.dispatch(loadBeers())
+  }
+
+  beersLength(): number {
+    let length = 0
+    this.beers$.subscribe(beers => length = beers.length)
+    return length
+  }
+
+  next(): void {
+    this.startIndex += 20
+  }
+
+  last(): void {
+    let length = 0
+    this.beers$.subscribe(beers => length = beers.length)
+    let remainder = length % 20
+    this.startIndex = length - remainder - 1
+  }
+
+  previous(): void {
+    this.startIndex -= 20
+  }
+
+  first(): void {
+    this.startIndex = 0
   }
 
   filter(term: string): void {

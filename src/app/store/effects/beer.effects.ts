@@ -8,6 +8,7 @@ import { Location } from '@angular/common';
 import { BeerService } from '../../services/beer.service';
 
 import {
+    loadTwentyBeers,
     loadBeers,
     loadBeersFail,
     loadBeersSuccess,
@@ -29,10 +30,21 @@ import {
 @Injectable()
 export class BeerEffects {
  
+    loadTwentyBeers$ = createEffect(() => {
+        return this.actions$.pipe(
+        ofType(loadTwentyBeers),
+        mergeMap(() => this.beerService.getFirstTwenty()
+            .pipe(
+                map(beers => loadBeersSuccess({beers})),
+                catchError(() => of(loadBeersFail()))
+            )
+        )
+    )});
+
     loadBeers$ = createEffect(() => {
         return this.actions$.pipe(
         ofType(loadBeers),
-        mergeMap(() => this.beerService.getBeers()
+        mergeMap(() => this.beerService.getAll()
             .pipe(
                 map(beers => loadBeersSuccess({beers})),
                 catchError(() => of(loadBeersFail()))

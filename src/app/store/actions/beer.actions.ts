@@ -3,6 +3,7 @@ import { createAction, props } from '@ngrx/store';
 import { Beer, BeerDetails, NewBeer } from '../../models/beer'
 import { User } from '../../models/user'
 
+export const loadTwentyBeers = createAction('[Beers Component] Load Twenty Beers')
 export const loadBeers = createAction('[Beers Component] Load All Beers')
 export const loadBeersFail = createAction('[Beers API] Beers Loaded Fail')
 export const loadBeersSuccess = createAction('[Beers API] Beers Loaded Success', props<{beers: Beer[]}>())
